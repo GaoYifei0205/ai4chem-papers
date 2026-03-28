@@ -26,12 +26,13 @@ INDEX_FILE = ROOT_DIR / "index.html"
 CST = timezone(timedelta(hours=8))
 
 CATEGORY_META = {
-    "molecular_generation": {"label": "分子生成", "color": "#6366f1", "icon": "⚗️"},
-    "drug_design":          {"label": "药物设计", "color": "#ec4899", "icon": "💊"},
-    "reaction_prediction":  {"label": "反应预测", "color": "#f59e0b", "icon": "🔄"},
-    "materials_science":    {"label": "材料科学", "color": "#10b981", "icon": "🔬"},
-    "llm_chemistry":        {"label": "LLM化学",  "color": "#3b82f6", "icon": "🤖"},
-    "ai_agent":             {"label": "AI Agent", "color": "#8b5cf6", "icon": "🦾"},
+    "molecular_generation": {"label": "分子生成",   "color": "#6366f1", "icon": "⚗️"},
+    "drug_design":          {"label": "药物设计",   "color": "#ec4899", "icon": "💊"},
+    "reaction_prediction":  {"label": "反应预测",   "color": "#f59e0b", "icon": "🔄"},
+    "materials_science":    {"label": "材料科学",   "color": "#10b981", "icon": "🔬"},
+    "llm_chemistry":        {"label": "LLM化学",   "color": "#3b82f6", "icon": "🤖"},
+    "ai_agent":             {"label": "AI Agent",  "color": "#8b5cf6", "icon": "🦾"},
+    "llm_advances":         {"label": "大模型进展", "color": "#f97316", "icon": "🚀"},
 }
 
 # arXiv queries: (search_query, [categories_to_assign])
@@ -64,6 +65,20 @@ ARXIV_QUERIES = [
     # AI Agent
     ('all:"self-driving lab" OR all:"autonomous synthesis" OR all:"robotic chemistry" OR all:"AI agent chemistry"',
      ["ai_agent"]),
+    # LLM Advances (general foundation model progress relevant to science)
+    ('all:"technical report" AND (all:"language model" OR all:"Qwen" OR all:"Llama" OR all:"Gemini" OR all:"Claude" OR all:"GPT")',
+     ["llm_advances"]),
+    ('all:"foundation model" AND (all:"scaling law" OR all:"pretraining" OR all:"reasoning" OR all:"multimodal")',
+     ["llm_advances"]),
+    ('ti:"Qwen" OR ti:"Llama" OR ti:"Gemini" OR ti:"DeepSeek" OR ti:"Mistral" OR ti:"Claude" OR ti:"Phi-"',
+     ["llm_advances"]),
+]
+
+# CCF-A conference arXiv categories and keywords
+# Papers from NeurIPS/ICML/ICLR/ACL/AAAI appear on arXiv before/after acceptance
+CCF_A_VENUES = [
+    "NeurIPS", "ICML", "ICLR", "ACL", "EMNLP", "NAACL",
+    "AAAI", "IJCAI", "KDD", "WWW", "CVPR", "ICCV", "ECCV",
 ]
 
 # CrossRef journals for Nature/Science/中科院一区
@@ -215,34 +230,115 @@ def enrich_with_s2(papers: list[dict]) -> list[dict]:
 
 # ── HuggingFace Papers ────────────────────────────────────────────────────────
 
+def fetch_hf_papers(target_date: str, existing_ids: set) -> list[dict]:
+    """Fetch all papers from HuggingFace Daily Papers for target_date as a source."""
+    url = f"https://huggingface.co/papers?date={target_date}"
+    papers = []
+    try:
+        html = fetch_url(url)
+    except Exception as e:
+        print(f"  HF fetch error: {e}")
+        return papers
+
+    # Extract arXiv IDs from HF page links
+    arxiv_ids = []
+    seen = set()
+    for m in re.finditer(r'href=["\'](?:https?://huggingface\.co)?/papers/([\d]{4}\.[\d]+)', html):
+        aid = m.group(1)
+        if aid not in seen:
+            seen.add(aid)
+            arxiv_ids.append(aid)
+
+    # Extract upvote counts: look for numbers near each paper link
+    # HF renders like counts as plain numbers in the page
+    upvote_map = {}
+    for m in re.finditer(r'/papers/([\d]{4}\.[\d]+)[^<]{0,500}?(\d+)\s*(?:upvote|like|👍)', html, re.S):
+        upvote_map[m.group(1)] = int(m.group(2))
+
+    print(f"  HF: found {len(arxiv_ids)} paper IDs for {target_date}")
+
+    for arxiv_id in arxiv_ids:
+        if arxiv_id in existing_ids:
+            continue
+        # Fetch metadata from arXiv API
+        try:
+            api_url = f"http://export.arxiv.org/api/query?id_list={arxiv_id}"
+            xml_text = fetch_url(api_url)
+            time.sleep(1)
+            ns = {"atom": "http://www.w3.org/2005/Atom",
+                  "arxiv": "http://arxiv.org/schemas/atom"}
+            root = ET.fromstring(xml_text)
+            entries = root.findall("atom:entry", ns)
+            if not entries:
+                continue
+            entry = entries[0]
+            title = re.sub(r"\s+", " ", entry.findtext("atom:title", "", ns)).strip()
+            summary = re.sub(r"\s+", " ", entry.findtext("atom:summary", "", ns)).strip()
+            summary_short = summary[:300] + ("…" if len(summary) > 300 else "")
+            published = entry.findtext("atom:published", "", ns)[:10]
+            authors = [a.findtext("atom:name", "", ns)
+                       for a in entry.findall("atom:author", ns)]
+            institutions = list({
+                aff.text.strip()
+                for a in entry.findall("atom:author", ns)
+                for aff in a.findall("arxiv:affiliation", ns)
+                if aff.text
+            })
+        except Exception:
+            continue
+
+        likes = upvote_map.get(arxiv_id, 0)
+        cats = infer_categories(title + " " + summary)
+        if not cats:
+            cats = ["llm_advances"]  # HF papers not matching other cats → likely LLM
+
+        badges = ["hf_featured"]
+        if likes >= 10:
+            badges.append("hf_hot")
+
+        papers.append({
+            "id": arxiv_id,
+            "title": title,
+            "authors": authors[:6],
+            "institutions": institutions[:3],
+            "date": published or target_date,
+            "categories": cats,
+            "source": "huggingface",
+            "arxiv_id": arxiv_id,
+            "abstract_summary": summary_short,
+            "arxiv_url": f"https://arxiv.org/abs/{arxiv_id}",
+            "pdf_url": f"https://arxiv.org/pdf/{arxiv_id}",
+            "hf_url": f"https://huggingface.co/papers/{arxiv_id}",
+            "hf_likes": likes,
+            "citation_count": 0,
+            "badges": badges,
+        })
+
+    return papers
+
+
 def fetch_hf_likes(papers: list[dict], target_date: str) -> list[dict]:
-    """Try to match papers against HuggingFace daily papers and get like counts."""
+    """Enrich existing arXiv papers with HuggingFace like counts."""
     url = f"https://huggingface.co/papers?date={target_date}"
     try:
         html = fetch_url(url)
     except Exception:
         return papers
 
-    # Extract arXiv IDs and like counts from HF page
-    # Pattern: /papers/2603.XXXXX and upvote numbers
     hf_data = {}
-    matches = re.findall(r'/papers/(\d{4}\.\d+)[^"]*"[^>]*>.*?(\d+)\s*(?:upvote|like)', html, re.S)
-    for arxiv_id, likes in matches:
-        hf_data[arxiv_id] = int(likes)
-
-    # Also simpler pattern
-    for m in re.finditer(r'/papers/([\d.]+)', html):
+    for m in re.finditer(r'/papers/([\d]{4}\.[\d]+)', html):
         aid = m.group(1)
         if aid not in hf_data:
             hf_data[aid] = 0
+    for m in re.finditer(r'/papers/([\d]{4}\.[\d]+)[^<]{0,500}?(\d+)\s*(?:upvote|like|👍)', html, re.S):
+        hf_data[m.group(1)] = int(m.group(2))
 
     for paper in papers:
         aid = paper.get("arxiv_id", "")
         if aid in hf_data:
             paper["hf_likes"] = hf_data[aid]
-            if hf_data[aid] >= 10:
-                if "hf_hot" not in paper["badges"]:
-                    paper["badges"].append("hf_hot")
+            if hf_data[aid] >= 10 and "hf_hot" not in paper["badges"]:
+                paper["badges"].append("hf_hot")
     return papers
 
 
@@ -339,10 +435,22 @@ def infer_categories(text: str) -> list[str]:
         cats.append("reaction_prediction")
     if any(w in text_l for w in ["crystal structure", "force field", "materials", "battery"]):
         cats.append("materials_science")
-    if any(w in text_l for w in ["language model", "llm", "gpt", "bert", "reasoning"]):
+    if any(w in text_l for w in ["chemical language model", "chemistry llm", "molecular llm", "chembench", "chemfm"]):
+        cats.append("llm_chemistry")
+    elif any(w in text_l for w in ["language model", "llm", "gpt", "bert", "reasoning"]) and \
+         any(w in text_l for w in ["chem", "mol", "drug", "material", "reaction", "synthesis"]):
         cats.append("llm_chemistry")
     if any(w in text_l for w in ["agent", "autonomous", "self-driving", "robotic"]):
         cats.append("ai_agent")
+    # LLM advances: model releases / tech reports not specific to chemistry
+    if any(w in text_l for w in ["qwen", "llama", "gemini", "claude", "deepseek", "mistral", "phi-", "grok",
+                                   "technical report", "scaling law", "pretraining", "foundation model"]):
+        if not cats or "llm_chemistry" not in cats:
+            cats.append("llm_advances")
+    # CCF-A venue tag
+    if any(v.lower() in text_l for v in CCF_A_VENUES):
+        if not cats:
+            cats.append("llm_advances")
     return cats
 
 
@@ -531,8 +639,19 @@ def generate_html(data: dict) -> str:
   .badge-hf {{ background: #fef3c7; color: #92400e; }}
   .badge-cited {{ background: #dcfce7; color: #166534; }}
   .badge-journal {{ background: #ede9fe; color: #4c1d95; }}
+  .badge-ccfa {{ background: #fef9c3; color: #713f12; }}
   .badge-code {{ background: #cffafe; color: #164e63; }}
   .badge-top {{ background: #fee2e2; color: #991b1b; }}
+  .paper-zh-summary {{
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    margin-top: 8px;
+    line-height: 1.65;
+    padding: 8px 12px;
+    background: #1e2235;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+  }}
   .paper-authors {{
     font-size: 0.8rem;
     color: var(--text-muted);
@@ -627,6 +746,10 @@ def generate_html(data: dict) -> str:
       <input type="checkbox" class="src-filter" value="journal" checked>
       📰 期刊
     </label>
+    <label class="filter-item">
+      <input type="checkbox" class="src-filter" value="huggingface" checked>
+      🤗 HuggingFace
+    </label>
     <div class="stats" id="stats">
       加载中…
     </div>
@@ -720,7 +843,10 @@ def render_paper_card(p: dict) -> str:
     pdf_url = p.get("pdf_url", "")
     doi_url = p.get("doi_url", "")
     code_url = p.get("code_url", "")
+    hf_url = p.get("hf_url", "")
     abstract = escape(p.get("abstract_summary", ""))
+    # zh_summary: Chinese summary if available, else use abstract
+    zh_summary = escape(p.get("zh_summary", ""))
     authors = escape(", ".join(p.get("authors", [])[:4]))
     if len(p.get("authors", [])) > 4:
         authors += " et al."
@@ -729,6 +855,7 @@ def render_paper_card(p: dict) -> str:
     hf_likes = p.get("hf_likes", 0)
     citations = p.get("citation_count", 0)
     journal = escape(p.get("journal", ""))
+    venue = escape(p.get("venue", ""))  # CCF-A venue name
 
     # Category tags
     cat_tags = ""
@@ -737,7 +864,14 @@ def render_paper_card(p: dict) -> str:
         cat_tags += f'<span class="tag" style="background:{meta["color"]}22;color:{meta["color"]};border:1px solid {meta["color"]}55">{meta["icon"]} {escape(meta["label"])}</span>'
 
     # Source tag
-    src_label = journal if journal else ("arXiv" if source == "arxiv" else source)
+    if source == "huggingface":
+        src_label = "🤗 HuggingFace"
+    elif journal:
+        src_label = journal
+    elif venue:
+        src_label = f"🎓 {venue}"
+    else:
+        src_label = "arXiv"
     source_tag = f'<span class="tag tag-source">{escape(src_label)}</span>'
 
     # Institution tags
@@ -747,21 +881,34 @@ def render_paper_card(p: dict) -> str:
 
     # Badge tags
     badge_html = ""
-    if "hf_hot" in badges or hf_likes >= 10:
+    if "hf_featured" in badges:
+        likes_str = f" {hf_likes}" if hf_likes > 0 else ""
+        badge_html += f'<span class="tag badge-hf">🤗{likes_str}</span>'
+    elif "hf_hot" in badges or hf_likes >= 10:
         badge_html += f'<span class="tag badge-hf">⭐ HF {hf_likes}</span>'
     if "cited" in badges or citations >= 5:
         badge_html += f'<span class="tag badge-cited">📈 {citations} 引用</span>'
     if "journal" in badges:
         badge_html += '<span class="tag badge-journal">📰 期刊</span>'
+    if "ccf_a" in badges:
+        badge_html += '<span class="tag badge-ccfa">🏆 CCF-A</span>'
     if "code" in badges:
         badge_html += '<span class="tag badge-code">💻 代码</span>'
     if "top_institution" in badges:
         badge_html += '<span class="tag badge-top">🏆 顶级机构</span>'
 
+    # Chinese summary block (shown directly, no toggle needed)
+    zh_block = ""
+    if zh_summary:
+        zh_block = f'<div class="paper-zh-summary">{zh_summary}</div>'
+
     # Links
-    links = f'<a class="btn-link" href="{escape(arxiv_url)}" target="_blank" rel="noopener">arXiv</a>'
+    primary_url = arxiv_url if arxiv_url != "#" else doi_url
+    links = f'<a class="btn-link" href="{escape(primary_url)}" target="_blank" rel="noopener">arXiv</a>'
     if pdf_url:
         links += f' <a class="btn-link" href="{escape(pdf_url)}" target="_blank" rel="noopener">PDF</a>'
+    if hf_url:
+        links += f' <a class="btn-link" href="{escape(hf_url)}" target="_blank" rel="noopener">🤗 HF</a>'
     if doi_url and doi_url != arxiv_url:
         links += f' <a class="btn-link" href="{escape(doi_url)}" target="_blank" rel="noopener">DOI</a>'
     if code_url:
@@ -770,8 +917,13 @@ def render_paper_card(p: dict) -> str:
     cats_str = ",".join(cats)
     search_text = (title + " " + authors + " " + " ".join(institutions)).lower()
 
+    abstract_section = ""
+    if abstract:
+        abstract_section = f"""    <div class="paper-abstract">{abstract}</div>
+    <button class="toggle-abstract">▼ 展开摘要（英文）</button>"""
+
     return f"""  <div class="paper-card" data-categories="{escape(cats_str)}" data-source="{escape(source)}" data-searchtext="{escape(search_text)}">
-    <a class="paper-title" href="{escape(arxiv_url)}" target="_blank" rel="noopener">{title}</a>
+    <a class="paper-title" href="{escape(primary_url)}" target="_blank" rel="noopener">{title}</a>
     <div class="paper-meta">
       {source_tag}
       {cat_tags}
@@ -779,8 +931,8 @@ def render_paper_card(p: dict) -> str:
       {badge_html}
     </div>
     <div class="paper-authors">{authors}</div>
-    <div class="paper-abstract">{abstract}</div>
-    <button class="toggle-abstract">▼ 展开摘要</button>
+{zh_block}
+{abstract_section}
     <div class="paper-links">{links}</div>
   </div>
 """
@@ -807,14 +959,27 @@ def main():
     print(f"  Found {len(journal_papers)} journal papers")
     new_papers.extend(journal_papers)
 
+    print("Fetching from HuggingFace Daily Papers…")
+    hf_papers = fetch_hf_papers(target_date, existing_ids)
+    print(f"  Found {len(hf_papers)} HuggingFace papers")
+    new_papers.extend(hf_papers)
+
     # Deduplicate
     unique_new = [p for p in new_papers if p["id"] not in existing_ids]
+    # Second-pass dedup within unique_new itself
+    seen = set()
+    deduped = []
+    for p in unique_new:
+        if p["id"] not in seen:
+            seen.add(p["id"])
+            deduped.append(p)
+    unique_new = deduped
     print(f"Adding {len(unique_new)} new unique papers")
 
     print("Enriching with Semantic Scholar citation counts…")
     unique_new = enrich_with_s2(unique_new)
 
-    print("Fetching HuggingFace likes…")
+    print("Enriching arXiv papers with HuggingFace likes…")
     unique_new = fetch_hf_likes(unique_new, target_date)
 
     existing["papers"].extend(unique_new)
