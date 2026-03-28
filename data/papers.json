@@ -1,0 +1,757 @@
+{
+  "last_updated": "2026-03-28 13:00 CST",
+  "papers": [
+    {
+      "id": "2603.18256",
+      "title": "MolRGen: Training and Evaluation Setting for De Novo Molecular Generation with Reasoning Models",
+      "authors": [
+        "Anonymous et al."
+      ],
+      "institutions": [],
+      "date": "2026-03-18",
+      "categories": [
+        "molecular_generation"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.18256",
+      "abstract_summary": "Benchmark dataset for training reasoning-based LLMs on de novo molecular generation without ground-truth labels. Trained 24B parameter LLM using reinforcement learning.",
+      "arxiv_url": "https://arxiv.org/abs/2603.18256",
+      "pdf_url": "https://arxiv.org/pdf/2603.18256",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.17633",
+      "title": "ATMOS: Atomic Trajectory Modeling with State Space Models for Biomolecular Dynamics",
+      "authors": [
+        "Anonymous et al."
+      ],
+      "institutions": [],
+      "date": "2026-03-18",
+      "categories": [
+        "drug_design",
+        "molecular_generation"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.17633",
+      "abstract_summary": "Generates atom-level MD trajectories for protein-ligand systems using Pairformer-based mechanisms. Trained on PDB structures and mdCATH/MISATO datasets.",
+      "arxiv_url": "https://arxiv.org/abs/2603.17633",
+      "pdf_url": "https://arxiv.org/pdf/2603.17633",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.12808",
+      "title": "A Multi-task Large Reasoning Model for Molecular Science",
+      "authors": [
+        "Anonymous et al."
+      ],
+      "institutions": [],
+      "date": "2026-03-13",
+      "categories": [
+        "molecular_generation",
+        "drug_design",
+        "llm_chemistry"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.12808",
+      "abstract_summary": "Multi-specialist architecture with chain-of-thought reasoning enhanced by RL; achieves 50.3% improvement over baseline. CNS drug candidate design case study.",
+      "arxiv_url": "https://arxiv.org/abs/2603.12808",
+      "pdf_url": "https://arxiv.org/pdf/2603.12808",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.09268",
+      "title": "Logos: An Evolvable Reasoning Engine for Rational Molecular Design",
+      "authors": [
+        "Haibin Wen",
+        "Zhe Zhao",
+        "Fanfu Wang"
+      ],
+      "institutions": [],
+      "date": "2026-03-10",
+      "categories": [
+        "molecular_generation",
+        "llm_chemistry"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.09268",
+      "abstract_summary": "Compact molecular reasoning model integrating multi-step logical reasoning with strict chemical consistency. Matches or surpasses substantially larger general-purpose LLMs with a fraction of parameters.",
+      "arxiv_url": "https://arxiv.org/abs/2603.09268",
+      "pdf_url": "https://arxiv.org/pdf/2603.09268",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.05567",
+      "title": "FuseDiff: Symmetry-Preserving Joint Diffusion for Dual-Target Structure-Based Drug Design",
+      "authors": [
+        "Anonymous et al."
+      ],
+      "institutions": [],
+      "date": "2026-03-05",
+      "categories": [
+        "drug_design",
+        "molecular_generation"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.05567",
+      "abstract_summary": "End-to-end diffusion model generating ligands with two pocket-specific binding poses simultaneously. Implements Dual-target Local Context Fusion mechanism.",
+      "arxiv_url": "https://arxiv.org/abs/2603.05567",
+      "pdf_url": "https://arxiv.org/pdf/2603.05567",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.03517",
+      "title": "MMAI Gym for Science: Training Liquid Foundation Models for Drug Discovery",
+      "authors": [
+        "Maxim Kuznetsov et al."
+      ],
+      "institutions": [],
+      "date": "2026-03-03",
+      "categories": [
+        "drug_design",
+        "molecular_generation"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.03517",
+      "abstract_summary": "Purpose-trained Liquid Foundation Model outperforming larger general-purpose models on molecular benchmarks. Covers molecular optimization, ADMET prediction, retrosynthesis, drug-target activity.",
+      "arxiv_url": "https://arxiv.org/abs/2603.03517",
+      "pdf_url": "https://arxiv.org/pdf/2603.03517",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.22274",
+      "title": "Development and Large-Scale Benchmarks of a Protein-Ligand Absolute Binding Free Energy Toolkit",
+      "authors": [
+        "Yu Liu",
+        "Ailun Wang",
+        "Yu Xia",
+        "Zhi Wang",
+        "Wen Yan"
+      ],
+      "institutions": [],
+      "date": "2026-03-23",
+      "categories": [
+        "drug_design"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.22274",
+      "abstract_summary": "Felis toolkit for high-throughput ABFE calculations. 43 protein targets and 859 ligands benchmark. Zero-shot predictions without custom force-field modifications.",
+      "arxiv_url": "https://arxiv.org/abs/2603.22274",
+      "pdf_url": "https://arxiv.org/pdf/2603.22274",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.22399",
+      "title": "Latent Style-based Quantum Wasserstein GAN for Drug Design",
+      "authors": [
+        "Anonymous et al."
+      ],
+      "institutions": [],
+      "date": "2026-03-23",
+      "categories": [
+        "drug_design",
+        "molecular_generation"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.22399",
+      "abstract_summary": "Quantum computing + GANs for de novo drug design. Validated on IBM Heron 156-qubit quantum computer.",
+      "arxiv_url": "https://arxiv.org/abs/2603.22399",
+      "pdf_url": "https://arxiv.org/pdf/2603.22399",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.20389",
+      "title": "Nexerra-R1: A Chemical Language Model for Reticular Materials Design",
+      "authors": [
+        "Dhruv Menon",
+        "Omar M. Yaghi",
+        "David Fairen-Jimenez et al."
+      ],
+      "institutions": [
+        "UC Berkeley",
+        "Cambridge"
+      ],
+      "date": "2026-03-20",
+      "categories": [
+        "materials_science",
+        "llm_chemistry"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.20389",
+      "abstract_summary": "Chemical language model for MOF reticular chemistry inverse design. Supports unconstrained organic linker generation and symmetric polydentate motif design. Validates rediscovery of known MOFs and proposes CU-525.",
+      "arxiv_url": "https://arxiv.org/abs/2603.20389",
+      "pdf_url": "https://arxiv.org/pdf/2603.20389",
+      "code_url": "https://github.com/fairen-group/nexerra-r1",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": [
+        "code"
+      ]
+    },
+    {
+      "id": "2603.14792",
+      "title": "LaPro-DTA: Latent Dual-View Drug Representations for Generalizable Drug-Target Affinity Prediction",
+      "authors": [
+        "Zihan Dun",
+        "Liuyi Xu",
+        "An-Yang Lu",
+        "Shuang Li",
+        "Yining Qian"
+      ],
+      "institutions": [],
+      "date": "2026-03-15",
+      "categories": [
+        "drug_design"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.14792",
+      "abstract_summary": "Cold-start drug-target affinity prediction with latent dual-view drug representation and stochastic perturbation. 8% MSE reduction on Davis dataset in unseen-drug settings.",
+      "arxiv_url": "https://arxiv.org/abs/2603.14792",
+      "pdf_url": "https://arxiv.org/pdf/2603.14792",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.03295",
+      "title": "Mozi: Governed Autonomy for Drug Discovery",
+      "authors": [
+        "He Cao",
+        "Siyu Liu",
+        "Fan Zhang",
+        "Zijing Liu",
+        "Hao Li",
+        "Yu Li et al."
+      ],
+      "institutions": [],
+      "date": "2026-03-03",
+      "categories": [
+        "drug_design",
+        "ai_agent"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.03295",
+      "abstract_summary": "Dual-layer AI agent architecture combining governance with flexibility for drug discovery. Role-based tool isolation and strategic human checkpoints for long-horizon pharmaceutical pipelines.",
+      "arxiv_url": "https://arxiv.org/abs/2603.03295",
+      "pdf_url": "https://arxiv.org/pdf/2603.03295",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.20262",
+      "title": "DESRO: Deciphering Scientific Reasoning Steps from Outcome Data",
+      "authors": [
+        "Zequn Liu",
+        "Kehan Wu",
+        "Shufang Xie",
+        "Zekun Guo",
+        "Wei Zhang",
+        "Tao Qin",
+        "Yingce Xia et al."
+      ],
+      "institutions": [],
+      "date": "2026-03-24",
+      "categories": [
+        "molecular_generation",
+        "llm_chemistry"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.20262",
+      "abstract_summary": "DESRO bridges gap between abundant molecular experimental outcomes and scarce reasoning steps. Applied to molecule optimization with 2.3M molecular property records; highest success rate on 15/18 tasks.",
+      "arxiv_url": "https://arxiv.org/abs/2603.20262",
+      "pdf_url": "https://arxiv.org/pdf/2603.20262",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.23367",
+      "title": "AlphaDiffract: Deep Learning for Powder X-ray Diffraction Analysis",
+      "authors": [
+        "Nina Andrejevic",
+        "Ming Du",
+        "Hemant Sharma",
+        "James P. Horwath et al."
+      ],
+      "institutions": [],
+      "date": "2026-03-24",
+      "categories": [
+        "materials_science"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.23367",
+      "abstract_summary": "Deep learning system for analyzing powder X-ray diffraction data. Predicts crystal system, space group, and lattice parameters. ConvNeXt architecture trained on 31M+ simulated patterns.",
+      "arxiv_url": "https://arxiv.org/abs/2603.23367",
+      "pdf_url": "https://arxiv.org/pdf/2603.23367",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.24752",
+      "title": "Autotuning T-PaiNN: Transfer Learning for Graph Neural Network Interatomic Potentials",
+      "authors": [
+        "Vivienne Pelletier",
+        "Vedant Bhat",
+        "Daniel J. Rivera",
+        "Steven A. Wilson",
+        "Christopher L. Muhich"
+      ],
+      "institutions": [],
+      "date": "2026-03-25",
+      "categories": [
+        "materials_science"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.24752",
+      "abstract_summary": "Transfer learning framework leveraging classical force field data to improve GNN interatomic potentials. 25x error reduction in low-data regimes for QM9. Order-of-magnitude MAE reduction.",
+      "arxiv_url": "https://arxiv.org/abs/2603.24752",
+      "pdf_url": "https://arxiv.org/pdf/2603.24752",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.16770",
+      "title": "Garnet: Training a Neural Network Force Field for Proteins",
+      "authors": [
+        "Alexandre Blanco-González",
+        "Thea K Schulze",
+        "Evianne Rovers",
+        "Joe G Greener"
+      ],
+      "institutions": [],
+      "date": "2026-03-17",
+      "categories": [
+        "materials_science"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.16770",
+      "abstract_summary": "GNN assigning force field parameters using continuous atom typing. Trained on QM and experimental data without relying on existing parameters. Comparable to conventional force fields.",
+      "arxiv_url": "https://arxiv.org/abs/2603.16770",
+      "pdf_url": "https://arxiv.org/pdf/2603.16770",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.10631",
+      "title": "High-Throughput-Screening ML Workflow for Battery Materials",
+      "authors": [
+        "Aljoscha Felix Baumann",
+        "Daniel Mutter",
+        "Daniel F. Urban",
+        "Christian Elsässer"
+      ],
+      "institutions": [],
+      "date": "2026-03-14",
+      "categories": [
+        "materials_science"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.10631",
+      "abstract_summary": "ML workflow for predicting volume changes during ion intercalation in battery materials. Screened ~1.175M transition-metal compounds using bond-length predictions.",
+      "arxiv_url": "https://arxiv.org/abs/2603.10631",
+      "pdf_url": "https://arxiv.org/pdf/2603.10631",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.05532",
+      "title": "On the Reliability of AI Methods in Drug Discovery: Evaluation of Boltz-2",
+      "authors": [
+        "Shunzhou Wan",
+        "Xibei Zhang",
+        "Xiao Xue",
+        "Peter V. Coveney"
+      ],
+      "institutions": [],
+      "date": "2026-03-02",
+      "categories": [
+        "drug_design"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.05532",
+      "abstract_summary": "Extensive evaluation of Boltz-2 biomolecular foundation model on 16,780 (3CLPro) and 21,702 (TNKS2) compounds. Shows only weak-to-moderate correlations in energetic evaluations. Highlights necessity of physics-based refinement.",
+      "arxiv_url": "https://arxiv.org/abs/2603.05532",
+      "pdf_url": "https://arxiv.org/pdf/2603.05532",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.02810",
+      "title": "ChemFlow: Hierarchical Neural Network for Chemical Mixture Properties",
+      "authors": [
+        "Jinming Fan",
+        "Chao Qian",
+        "Wilhelm T. S. Huck",
+        "William E. Robinson",
+        "Shaodong Zhou"
+      ],
+      "institutions": [],
+      "date": "2026-03-03",
+      "categories": [
+        "materials_science",
+        "llm_chemistry"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.02810",
+      "abstract_summary": "Hierarchical NN framework for chemical mixtures integrating atomic, functional group, and molecular-level features with bidirectional attention for composition-dependent property modeling.",
+      "arxiv_url": "https://arxiv.org/abs/2603.02810",
+      "pdf_url": "https://arxiv.org/pdf/2603.02810",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2603.12017",
+      "title": "Thermodynamic Descriptors from MD for Out-of-Distribution Property Prediction",
+      "authors": [
+        "Nuria H. Espejo",
+        "Pablo Llombart",
+        "Andrés González de Castilla",
+        "Jorge Ramirez",
+        "Jorge R. Espinosa",
+        "Adiran Garaizar"
+      ],
+      "institutions": [],
+      "date": "2026-03-13",
+      "categories": [
+        "materials_science"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2603.12017",
+      "abstract_summary": "Physics-informed framework replacing structural inputs with thermodynamic properties from MD, enabling accurate property prediction for entire chemical classes absent from training set.",
+      "arxiv_url": "https://arxiv.org/abs/2603.12017",
+      "pdf_url": "https://arxiv.org/pdf/2603.12017",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "retro-2603",
+      "title": "Order Matters in Retrosynthesis: Structure-aware Generation via Reaction-Center-Guided Discrete Flow Matching",
+      "authors": [
+        "Chenguang Wang",
+        "Zihan Zhou",
+        "Lei Bai",
+        "Tianshu Yu"
+      ],
+      "institutions": [],
+      "date": "2026-02-13",
+      "categories": [
+        "reaction_prediction"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2602.XXXXX",
+      "abstract_summary": "Structure-aware template-free retrosynthesis via discrete flow matching. Reduces generation steps from 500 to 20-50. 61.2% top-1 on USPTO-50k. 280K parameter model matches 65M parameter baseline with proper atom ordering.",
+      "arxiv_url": "https://arxiv.org/abs/2602.09275",
+      "pdf_url": "https://arxiv.org/pdf/2602.09275",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2602.17886",
+      "title": "El Agente Sólido: A New Age(nt) for Solid State Simulations",
+      "authors": [
+        "Sai Govind Hari Kumar",
+        "Alán Aspuru-Guzik et al."
+      ],
+      "institutions": [
+        "University of Toronto"
+      ],
+      "date": "2026-02-19",
+      "categories": [
+        "ai_agent",
+        "materials_science"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2602.17886",
+      "abstract_summary": "Multi-agent framework for automating solid-state quantum chemistry workflows. Integrates DFT, phonon calculations, and ML potentials using Quantum ESPRESSO.",
+      "arxiv_url": "https://arxiv.org/abs/2602.17886",
+      "pdf_url": "https://arxiv.org/pdf/2602.17886",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": []
+    },
+    {
+      "id": "2602.07491",
+      "title": "GraphAgents: Knowledge Graph-Guided Agentic AI for Cross-Domain Materials Design",
+      "authors": [
+        "Isabella A. Stewart",
+        "Markus J. Buehler et al."
+      ],
+      "institutions": [
+        "MIT"
+      ],
+      "date": "2026-02-07",
+      "categories": [
+        "ai_agent",
+        "materials_science"
+      ],
+      "source": "arxiv",
+      "arxiv_id": "2602.07491",
+      "abstract_summary": "Multi-agent framework using knowledge graphs for PFAS-alternative sustainable materials discovery. Graph traversal strategies for cross-domain materials design.",
+      "arxiv_url": "https://arxiv.org/abs/2602.07491",
+      "pdf_url": "https://arxiv.org/pdf/2602.07491",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": [
+        "top_institution"
+      ]
+    },
+    {
+      "id": "10.1126_sciadv.aec7382",
+      "title": "Engineering low-symmetry colloidal crystals with optical anisotropies",
+      "authors": [
+        "Haixin Lin",
+        "Sangmin Lee",
+        "Yinsheng Guo",
+        "Vahagn Mkhitaryan",
+        "Diego M. Solís",
+        "Víctor F. Martín"
+      ],
+      "institutions": [
+        "Departamento de Teoría de la Señal y Comunicaciones y Sistemas Telemáticos y Computación, Universidad Rey Juan Carlos, 28942 Fuenlabrada, Spain.",
+        "Biomedical Research Networking Center in Bioengineering, Biomaterials, and Nanomedicine (CIBER-BBN), 20014 Donostia-San Sebastian, Spain.",
+        "Ikerbasque, Basque Foundation for Science, 43009 Bilbao, Spain."
+      ],
+      "date": "2026-03-27",
+      "categories": [
+        "materials_science"
+      ],
+      "source": "journal",
+      "journal": "Science Advances",
+      "doi": "10.1126/sciadv.aec7382",
+      "doi_url": "https://doi.org/10.1126/sciadv.aec7382",
+      "abstract_summary": "Engineered low-symmetry colloidal crystals are emerging as promising performance-enhancing alternatives to natural materials for optical devices. However, current synthesis methods cannot precisely control structural features such as the orientation of the optical axes in these crystals. Here, DNA-m",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": [
+        "journal"
+      ]
+    },
+    {
+      "id": "10.1126_sciadv.adw7275",
+      "title": "Harnessing semen-derived exosomes for noninvasive fundus drug delivery: A paradigm for exosome-based ocular fundus therapeutics",
+      "authors": [
+        "Jiansong Zhao",
+        "Tian Yin",
+        "Yaxin Deng",
+        "Hongbing Liu",
+        "Mingli Wei",
+        "Chenxiao Chu"
+      ],
+      "institutions": [
+        "School of Traditional Chinese Materia Medica, Shenyang Pharmaceutical University, Shenyang 110016, Liaoning, China.",
+        "Department of Pharmaceutics, School of Pharmacy, Shenyang Pharmaceutical University, Shenyang 110016, Liaoning, China."
+      ],
+      "date": "2026-03-27",
+      "categories": [
+        "llm_chemistry"
+      ],
+      "source": "journal",
+      "journal": "Science Advances",
+      "doi": "10.1126/sciadv.adw7275",
+      "doi_url": "https://doi.org/10.1126/sciadv.adw7275",
+      "abstract_summary": "Exosomes, despite their promise as drug carriers for crossing biological barriers, remain underexplored for noninvasive posterior ocular delivery. Here, we demonstrate that semen-derived exosomes (SEVs) penetrate ocular barriers effectively, owing to their epidermal growth factor expression, which m",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": [
+        "journal"
+      ]
+    },
+    {
+      "id": "10.1126_sciadv.aea8280",
+      "title": "Primary human intestinal organoids model enteric infection of monkeypox virus and enable scalable drug discovery",
+      "authors": [
+        "Pengfei Li",
+        "Xin Wang",
+        "Jiangrong Zhou",
+        "Yang Yao",
+        "Yining Wang",
+        "Guige Xu"
+      ],
+      "institutions": [
+        "State Key Laboratory of Oral Diseases &amp; National Center for Stomatology &amp; National Clinical Research Center for Oral Diseases, Department of Implantology, West China Hospital of Stomatology, Sichuan University, Chengdu, Sichuan 610041, China.",
+        "University of Grenoble Alpes, CEA, Inserm, IRIG, UA13 BGE, Biomics, Grenoble, France.",
+        "Computational Bioscience Research Center, King Abdullah University of Science and Technology, Thuwal, Saudi Arabia."
+      ],
+      "date": "2026-03-27",
+      "categories": [
+        "llm_chemistry"
+      ],
+      "source": "journal",
+      "journal": "Science Advances",
+      "doi": "10.1126/sciadv.aea8280",
+      "doi_url": "https://doi.org/10.1126/sciadv.aea8280",
+      "abstract_summary": "Monkeypox virus (MPXV) infection-associated intestinal manifestations, including diarrhea and proctitis, have been frequently reported during mpox outbreaks. Here, we present clinical evidence that MPXV can directly infect the human intestine and induce lesions. Intriguingly, primary organoids cultu",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": [
+        "journal"
+      ]
+    },
+    {
+      "id": "10.1021_jacs.5c22597",
+      "title": "Investigating the Intrinsic Activity, Nature, and Deactivation Pathway of a Carbon-Nanotube-Confined Molecular Co Catalyst for CO\n                    <sub>2</sub>\n                    Reduction",
+      "authors": [
+        "Matthieu Haake",
+        "Cécile Caumes",
+        "Ragnar Bjornsson",
+        "Christine Saint-Pierre",
+        "Didier Gasparutto",
+        "Giulia Veronesi"
+      ],
+      "institutions": [
+        "Université Grenoble Alpes, CNRS, CEA, IRIG, SyMMES, 17 rue des Martyrs, F-38000 Grenoble, France",
+        "Université Grenoble Alpes, CNRS, CEA, IRIG, Laboratoire de Chimie et Biologie des Métaux, 17 rue des Martyrs, F-38000 Grenoble, France",
+        "Institut de Chimie Moléculaire de Grenoble, UAR2607 CNRS Université Grenoble Alpes"
+      ],
+      "date": "2026-03-27",
+      "categories": [
+        "llm_chemistry"
+      ],
+      "source": "journal",
+      "journal": "Journal of the American Chemical Society",
+      "doi": "10.1021/jacs.5c22597",
+      "doi_url": "https://doi.org/10.1021/jacs.5c22597",
+      "abstract_summary": "",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": [
+        "journal"
+      ]
+    },
+    {
+      "id": "10.1021_jacs.5c20496",
+      "title": "Interlayer-Confined Molecular Assembly Enables a Family of Two-Dimensional Room-Temperature Ferromagnets",
+      "authors": [
+        "Yang Liu",
+        "Haifeng Lv",
+        "Xiaomeng Chen",
+        "Ke Xu",
+        "Yuqiao Guo",
+        "Zimo Liu"
+      ],
+      "institutions": [
+        "University of Science & Technology of China",
+        "State Key Laboratory of Precision and Intelligent Chemistry, School of Chemistry and Materials Science"
+      ],
+      "date": "2026-03-27",
+      "categories": [
+        "llm_chemistry"
+      ],
+      "source": "journal",
+      "journal": "Journal of the American Chemical Society",
+      "doi": "10.1021/jacs.5c20496",
+      "doi_url": "https://doi.org/10.1021/jacs.5c20496",
+      "abstract_summary": "",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": [
+        "journal"
+      ]
+    },
+    {
+      "id": "10.1021_acs.jcim.5c02523",
+      "title": "StereoMolGraph: Stereochemistry-Aware Molecular and Reaction Graphs",
+      "authors": [
+        "Maxim Papusha",
+        "Kai Leonhard"
+      ],
+      "institutions": [
+        "Institute of Technical Thermodynamics, RWTH Aachen University, Schinkelstr. 8, 52062 Aachen, Germany"
+      ],
+      "date": "2026-03-27",
+      "categories": [
+        "llm_chemistry"
+      ],
+      "source": "journal",
+      "journal": "Journal of Chemical Information and Modeling",
+      "doi": "10.1021/acs.jcim.5c02523",
+      "doi_url": "https://doi.org/10.1021/acs.jcim.5c02523",
+      "abstract_summary": "",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": [
+        "journal"
+      ]
+    },
+    {
+      "id": "10.1021_acs.jcim.6c00111",
+      "title": "CHARMM-GUI\n                    <i>Ligand Docker</i>\n                    for Molecular Docking with Various Docking Programs",
+      "authors": [
+        "Donghyuk Suh",
+        "Gyusik Kim",
+        "Wonpil Im"
+      ],
+      "institutions": [
+        "Lehigh University",
+        "Department of Industrial Pharmacy",
+        "Department of Biological Sciences"
+      ],
+      "date": "2026-03-27",
+      "categories": [
+        "drug_design"
+      ],
+      "source": "journal",
+      "journal": "Journal of Chemical Information and Modeling",
+      "doi": "10.1021/acs.jcim.6c00111",
+      "doi_url": "https://doi.org/10.1021/acs.jcim.6c00111",
+      "abstract_summary": "",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": [
+        "journal"
+      ]
+    },
+    {
+      "id": "10.1021_acs.jcim.6c00329",
+      "title": "AI-MedCraft: A Strategy-Driven AI Platform for Multi-Objective Molecular Design",
+      "authors": [
+        "Khaled Barakat",
+        "Michael Jordy Rojas Ruiz",
+        "Hazem Ahmed",
+        "Ehsan Shahini",
+        "Yomna Barakat"
+      ],
+      "institutions": [
+        "Thoth Biosimulations Inc., 4560 Enterprise Square, 10230 Jasper Avenue, Edmonton, Alberta T5J 4P6, Canada"
+      ],
+      "date": "2026-03-27",
+      "categories": [
+        "llm_chemistry"
+      ],
+      "source": "journal",
+      "journal": "Journal of Chemical Information and Modeling",
+      "doi": "10.1021/acs.jcim.6c00329",
+      "doi_url": "https://doi.org/10.1021/acs.jcim.6c00329",
+      "abstract_summary": "",
+      "hf_likes": 0,
+      "citation_count": 0,
+      "badges": [
+        "journal"
+      ]
+    }
+  ]
+}
