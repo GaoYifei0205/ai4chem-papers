@@ -6,237 +6,80 @@
 <title>AI for Chemistry Papers</title>
 <style>
   :root {
-    --bg: #0f1117;
-    --surface: #1a1d2e;
-    --surface2: #252840;
-    --border: #2d3154;
-    --text: #e2e8f0;
-    --text-muted: #8892b0;
-    --accent: #6366f1;
+    --bg: #0f1117; --surface: #1a1d2e; --surface2: #252840;
+    --border: #2d3154; --text: #e2e8f0; --text-muted: #8892b0; --accent: #6366f1;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
+  body { background: var(--bg); color: var(--text);
     font-family: 'SF Pro Display', -apple-system, 'Segoe UI', sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
+    display: flex; flex-direction: column; min-height: 100vh; }
+  header { background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 16px 24px; display: flex; align-items: center;
+    justify-content: space-between; position: sticky; top: 0; z-index: 100; }
   header h1 { font-size: 1.3rem; font-weight: 700; color: #a5b4fc; }
   .update-time { font-size: 0.8rem; color: var(--text-muted); }
-  .layout { display: flex; flex: 1; gap: 0; }
-
-  /* Sidebar */
-  aside {
-    width: 220px;
-    min-width: 220px;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    padding: 20px 16px;
-    position: sticky;
-    top: 57px;
-    height: calc(100vh - 57px);
-    overflow-y: auto;
-  }
-  aside h3 {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    margin-bottom: 10px;
-    margin-top: 18px;
-  }
+  .layout { display: flex; flex: 1; }
+  aside { width: 220px; min-width: 220px; background: var(--surface);
+    border-right: 1px solid var(--border); padding: 20px 16px;
+    position: sticky; top: 57px; height: calc(100vh - 57px); overflow-y: auto; }
+  aside h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--text-muted); margin-bottom: 10px; margin-top: 18px; }
   aside h3:first-child { margin-top: 0; }
-  .filter-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 5px 4px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.88rem;
-    transition: background 0.15s;
-  }
+  .filter-item { display: flex; align-items: center; gap: 8px; padding: 5px 4px;
+    border-radius: 6px; cursor: pointer; font-size: 0.88rem; transition: background 0.15s; }
   .filter-item:hover { background: var(--surface2); }
   .filter-item input { accent-color: var(--accent); cursor: pointer; }
-  .cat-dot {
-    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-  }
-  .stats {
-    margin-top: 24px;
-    padding: 12px;
-    background: var(--surface2);
-    border-radius: 8px;
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    line-height: 1.8;
-  }
-
-  /* Main timeline */
-  main {
-    flex: 1;
-    padding: 24px 32px;
-    max-width: 900px;
-  }
+  .cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .stats { margin-top: 24px; padding: 12px; background: var(--surface2);
+    border-radius: 8px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.8; }
+  main { flex: 1; padding: 24px 32px; max-width: 900px; }
   .day-group { margin-bottom: 32px; }
-  .date-header {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--accent);
-    border-left: 3px solid var(--accent);
-    padding-left: 10px;
-    margin-bottom: 12px;
-    letter-spacing: 0.03em;
-  }
-
-  /* Paper card */
-  .paper-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 18px;
-    margin-bottom: 12px;
-    transition: border-color 0.2s, transform 0.15s;
-  }
-  .paper-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-1px);
-  }
-  .paper-title {
-    font-size: 0.97rem;
-    font-weight: 600;
-    color: #c7d2fe;
-    text-decoration: none;
-    line-height: 1.4;
-  }
+  .date-header { font-size: 0.95rem; font-weight: 700; color: var(--accent);
+    border-left: 3px solid var(--accent); padding-left: 10px;
+    margin-bottom: 12px; letter-spacing: 0.03em; }
+  .paper-card { background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 18px; margin-bottom: 12px;
+    transition: border-color 0.2s, transform 0.15s; }
+  .paper-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .paper-title { font-size: 0.97rem; font-weight: 600; color: #c7d2fe;
+    text-decoration: none; line-height: 1.4; }
   .paper-title:hover { color: #a5b4fc; text-decoration: underline; }
-  .paper-meta {
-    margin-top: 6px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    align-items: center;
-  }
-  .tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    font-size: 0.72rem;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-  .tag-source {
-    background: var(--surface2);
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-  }
-  .tag-institution {
-    background: #1e293b;
-    color: #94a3b8;
-    border: 1px solid #334155;
-  }
+  .paper-meta { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .tag { display: inline-flex; align-items: center; gap: 3px; font-size: 0.72rem;
+    padding: 2px 8px; border-radius: 20px; font-weight: 500; white-space: nowrap; }
+  .tag-source { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+  .tag-institution { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
   .badge-hf { background: #fef3c7; color: #92400e; }
   .badge-cited { background: #dcfce7; color: #166534; }
   .badge-journal { background: #ede9fe; color: #4c1d95; }
   .badge-ccfa { background: #fef9c3; color: #713f12; }
   .badge-code { background: #cffafe; color: #164e63; }
   .badge-top { background: #fee2e2; color: #991b1b; }
-  .paper-zh-summary {
-    font-size: 0.85rem;
-    color: #cbd5e1;
-    margin-top: 8px;
-    line-height: 1.65;
-    padding: 8px 12px;
-    background: #1e2235;
-    border-left: 3px solid var(--accent);
-    border-radius: 0 6px 6px 0;
-  }
-  .paper-authors {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-top: 5px;
-  }
-  .paper-abstract {
-    font-size: 0.83rem;
-    color: #94a3b8;
-    margin-top: 8px;
-    line-height: 1.6;
-    display: none;
-  }
+  .paper-authors { font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; }
+  .paper-zh-summary { font-size: 0.85rem; color: #cbd5e1; margin-top: 8px;
+    line-height: 1.65; padding: 8px 12px; background: #1e2235;
+    border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; }
+  .paper-abstract { font-size: 0.83rem; color: #94a3b8; margin-top: 8px;
+    line-height: 1.6; display: none; }
   .paper-abstract.open { display: block; }
-  .paper-links {
-    margin-top: 10px;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .btn-link {
-    font-size: 0.78rem;
-    padding: 4px 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    background: var(--surface2);
-    transition: all 0.15s;
-  }
-  .btn-link:hover {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-  }
-  .toggle-abstract {
-    font-size: 0.78rem;
-    color: var(--accent);
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0;
-    margin-top: 6px;
-  }
+  .paper-links { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-link { font-size: 0.78rem; padding: 4px 12px; border-radius: 6px;
+    text-decoration: none; border: 1px solid var(--border); color: var(--text-muted);
+    background: var(--surface2); transition: all 0.15s; }
+  .btn-link:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  .toggle-abstract { font-size: 0.78rem; color: var(--accent); cursor: pointer;
+    background: none; border: none; padding: 0; margin-top: 6px; }
   .toggle-abstract:hover { text-decoration: underline; }
   .hidden { display: none !important; }
-
-  /* Search */
   .search-wrap { margin-bottom: 20px; }
-  #search-input {
-    width: 100%;
-    padding: 10px 14px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-size: 0.9rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
+  #search-input { width: 100%; padding: 10px 14px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 8px; color: var(--text);
+    font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
   #search-input:focus { border-color: var(--accent); }
-
   @media (max-width: 768px) {
     .layout { flex-direction: column; }
-    aside {
-      width: 100%;
-      min-width: unset;
-      position: static;
-      height: auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
+    aside { width: 100%; min-width: unset; position: static; height: auto;
+      display: flex; flex-wrap: wrap; gap: 16px; }
     main { padding: 16px; max-width: 100%; }
   }
 </style>
@@ -244,7 +87,7 @@
 <body>
 <header>
   <h1>🧪 AI for Chemistry Papers</h1>
-  <span class="update-time">最后更新: 2026-03-28 13:00 CST</span>
+  <span class="update-time">最后更新: 2026-03-29 12:39 CST</span>
 </header>
 <div class="layout">
   <aside>
@@ -298,9 +141,7 @@
       <input type="checkbox" class="src-filter" value="huggingface" checked>
       🤗 HuggingFace
     </label>
-    <div class="stats" id="stats">
-      加载中…
-    </div>
+    <div class="stats" id="stats">加载中…</div>
   </aside>
   <main>
     <div class="search-wrap">
@@ -309,215 +150,145 @@
     <div id="timeline">
 <div class="day-group" data-date="2026-03-27">
   <div class="date-header">2026-03-27</div>
-  <div class="paper-card" data-categories="materials_science" data-source="journal" data-searchtext="engineering low-symmetry colloidal crystals with optical anisotropies haixin lin, sangmin lee, yinsheng guo, vahagn mkhitaryan et al. departamento de teoría de la señal y comunicaciones y sistemas telemáticos y computación, universidad rey juan carlos, 28942 fuenlabrada, spain. biomedical research networking center in bioengineering, biomaterials, and nanomedicine (ciber-bbn), 20014 donostia-san sebastian, spain. ikerbasque, basque foundation for science, 43009 bilbao, spain.">
+  <div class="paper-card" data-categories="materials_science" data-source="journal" data-searchtext="engineering low-symmetry colloidal crystals with optical anisotropies haixin lin sangmin lee yinsheng guo vahagn mkhitaryan diego m. solís víctor f. martín departamento de teoría de la señal y comunicaciones y sistemas telemáticos y computación, universidad rey juan carlos, 28942 fuenlabrada, spain. biomedical research networking center in bioengineering, biomaterials, and nanomedicine (ciber-bbn), 20014 donostia-san sebastian, spain. ikerbasque, basque foundation for science, 43009 bilbao, spain.">
     <a class="paper-title" href="https://doi.org/10.1126/sciadv.aec7382" target="_blank" rel="noopener">Engineering low-symmetry colloidal crystals with optical anisotropies</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">Science Advances</span>
-      <span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span>
-      <span class="tag tag-institution">🏛 Departamento de Teoría de la Señal y Comunicaciones y Sistemas Telemáticos y Computación, Universidad Rey Juan Carlos, 28942 Fuenlabrada, Spain.</span><span class="tag tag-institution">🏛 Biomedical Research Networking Center in Bioengineering, Biomaterials, and Nanomedicine (CIBER-BBN), 20014 Donostia-San Sebastian, Spain.</span>
-      <span class="tag badge-journal">📰 期刊</span>
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">Science Advances</span><span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span><span class="tag tag-institution">🏛 Departamento de Teoría de la Señal y Comunicaciones y Sistemas Telemáticos y Computación, Universidad Rey Juan Carlos, 28942 Fuenlabrada, Spain.</span><span class="tag tag-institution">🏛 Biomedical Research Networking Center in Bioengineering, Biomaterials, and Nanomedicine (CIBER-BBN), 20014 Donostia-San Sebastian, Spain.</span><span class="tag badge-journal">📰 期刊</span></div>
     <div class="paper-authors">Haixin Lin, Sangmin Lee, Yinsheng Guo, Vahagn Mkhitaryan et al.</div>
-
-    <div class="paper-abstract">Engineered low-symmetry colloidal crystals are emerging as promising performance-enhancing alternatives to natural materials for optical devices. However, current synthesis methods cannot precisely control structural features such as the orientation of the optical axes in these crystals. Here, DNA-m</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    
+        <div class="paper-abstract">Engineered low-symmetry colloidal crystals are emerging as promising performance-enhancing alternatives to natural materials for optical devices. However, current synthesis methods cannot precisely control structural features such as the orientation of the optical axes in these crystals. Here, DNA-m</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://doi.org/10.1126/sciadv.aec7382" target="_blank" rel="noopener">arXiv</a></div>
   </div>
-  <div class="paper-card" data-categories="llm_chemistry" data-source="journal" data-searchtext="harnessing semen-derived exosomes for noninvasive fundus drug delivery: a paradigm for exosome-based ocular fundus therapeutics jiansong zhao, tian yin, yaxin deng, hongbing liu et al. school of traditional chinese materia medica, shenyang pharmaceutical university, shenyang 110016, liaoning, china. department of pharmaceutics, school of pharmacy, shenyang pharmaceutical university, shenyang 110016, liaoning, china.">
+  <div class="paper-card" data-categories="llm_chemistry" data-source="journal" data-searchtext="harnessing semen-derived exosomes for noninvasive fundus drug delivery: a paradigm for exosome-based ocular fundus therapeutics jiansong zhao tian yin yaxin deng hongbing liu mingli wei chenxiao chu school of traditional chinese materia medica, shenyang pharmaceutical university, shenyang 110016, liaoning, china. department of pharmaceutics, school of pharmacy, shenyang pharmaceutical university, shenyang 110016, liaoning, china.">
     <a class="paper-title" href="https://doi.org/10.1126/sciadv.adw7275" target="_blank" rel="noopener">Harnessing semen-derived exosomes for noninvasive fundus drug delivery: A paradigm for exosome-based ocular fundus therapeutics</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">Science Advances</span>
-      <span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span>
-      <span class="tag tag-institution">🏛 School of Traditional Chinese Materia Medica, Shenyang Pharmaceutical University, Shenyang 110016, Liaoning, China.</span><span class="tag tag-institution">🏛 Department of Pharmaceutics, School of Pharmacy, Shenyang Pharmaceutical University, Shenyang 110016, Liaoning, China.</span>
-      <span class="tag badge-journal">📰 期刊</span>
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">Science Advances</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span><span class="tag tag-institution">🏛 School of Traditional Chinese Materia Medica, Shenyang Pharmaceutical University, Shenyang 110016, Liaoning, China.</span><span class="tag tag-institution">🏛 Department of Pharmaceutics, School of Pharmacy, Shenyang Pharmaceutical University, Shenyang 110016, Liaoning, China.</span><span class="tag badge-journal">📰 期刊</span></div>
     <div class="paper-authors">Jiansong Zhao, Tian Yin, Yaxin Deng, Hongbing Liu et al.</div>
-
-    <div class="paper-abstract">Exosomes, despite their promise as drug carriers for crossing biological barriers, remain underexplored for noninvasive posterior ocular delivery. Here, we demonstrate that semen-derived exosomes (SEVs) penetrate ocular barriers effectively, owing to their epidermal growth factor expression, which m</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    
+        <div class="paper-abstract">Exosomes, despite their promise as drug carriers for crossing biological barriers, remain underexplored for noninvasive posterior ocular delivery. Here, we demonstrate that semen-derived exosomes (SEVs) penetrate ocular barriers effectively, owing to their epidermal growth factor expression, which m</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://doi.org/10.1126/sciadv.adw7275" target="_blank" rel="noopener">arXiv</a></div>
   </div>
-  <div class="paper-card" data-categories="llm_chemistry" data-source="journal" data-searchtext="primary human intestinal organoids model enteric infection of monkeypox virus and enable scalable drug discovery pengfei li, xin wang, jiangrong zhou, yang yao et al. state key laboratory of oral diseases &amp;amp; national center for stomatology &amp;amp; national clinical research center for oral diseases, department of implantology, west china hospital of stomatology, sichuan university, chengdu, sichuan 610041, china. university of grenoble alpes, cea, inserm, irig, ua13 bge, biomics, grenoble, france. computational bioscience research center, king abdullah university of science and technology, thuwal, saudi arabia.">
+  <div class="paper-card" data-categories="llm_chemistry" data-source="journal" data-searchtext="primary human intestinal organoids model enteric infection of monkeypox virus and enable scalable drug discovery pengfei li xin wang jiangrong zhou yang yao yining wang guige xu state key laboratory of oral diseases &amp;amp; national center for stomatology &amp;amp; national clinical research center for oral diseases, department of implantology, west china hospital of stomatology, sichuan university, chengdu, sichuan 610041, china. university of grenoble alpes, cea, inserm, irig, ua13 bge, biomics, grenoble, france. computational bioscience research center, king abdullah university of science and technology, thuwal, saudi arabia.">
     <a class="paper-title" href="https://doi.org/10.1126/sciadv.aea8280" target="_blank" rel="noopener">Primary human intestinal organoids model enteric infection of monkeypox virus and enable scalable drug discovery</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">Science Advances</span>
-      <span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span>
-      <span class="tag tag-institution">🏛 State Key Laboratory of Oral Diseases &amp;amp; National Center for Stomatology &amp;amp; National Clinical Research Center for Oral Diseases, Department of Implantology, West China Hospital of Stomatology, Sichuan University, Chengdu, Sichuan 610041, China.</span><span class="tag tag-institution">🏛 University of Grenoble Alpes, CEA, Inserm, IRIG, UA13 BGE, Biomics, Grenoble, France.</span>
-      <span class="tag badge-journal">📰 期刊</span>
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">Science Advances</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span><span class="tag tag-institution">🏛 State Key Laboratory of Oral Diseases &amp;amp; National Center for Stomatology &amp;amp; National Clinical Research Center for Oral Diseases, Department of Implantology, West China Hospital of Stomatology, Sichuan University, Chengdu, Sichuan 610041, China.</span><span class="tag tag-institution">🏛 University of Grenoble Alpes, CEA, Inserm, IRIG, UA13 BGE, Biomics, Grenoble, France.</span><span class="tag badge-journal">📰 期刊</span></div>
     <div class="paper-authors">Pengfei Li, Xin Wang, Jiangrong Zhou, Yang Yao et al.</div>
-
-    <div class="paper-abstract">Monkeypox virus (MPXV) infection-associated intestinal manifestations, including diarrhea and proctitis, have been frequently reported during mpox outbreaks. Here, we present clinical evidence that MPXV can directly infect the human intestine and induce lesions. Intriguingly, primary organoids cultu</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    
+        <div class="paper-abstract">Monkeypox virus (MPXV) infection-associated intestinal manifestations, including diarrhea and proctitis, have been frequently reported during mpox outbreaks. Here, we present clinical evidence that MPXV can directly infect the human intestine and induce lesions. Intriguingly, primary organoids cultu</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://doi.org/10.1126/sciadv.aea8280" target="_blank" rel="noopener">arXiv</a></div>
   </div>
   <div class="paper-card" data-categories="llm_chemistry" data-source="journal" data-searchtext="investigating the intrinsic activity, nature, and deactivation pathway of a carbon-nanotube-confined molecular co catalyst for co
-                    &amp;lt;sub&amp;gt;2&amp;lt;/sub&amp;gt;
-                    reduction matthieu haake, cécile caumes, ragnar bjornsson, christine saint-pierre et al. université grenoble alpes, cnrs, cea, irig, symmes, 17 rue des martyrs, f-38000 grenoble, france université grenoble alpes, cnrs, cea, irig, laboratoire de chimie et biologie des métaux, 17 rue des martyrs, f-38000 grenoble, france institut de chimie moléculaire de grenoble, uar2607 cnrs université grenoble alpes">
+                    &lt;sub&gt;2&lt;/sub&gt;
+                    reduction matthieu haake cécile caumes ragnar bjornsson christine saint-pierre didier gasparutto giulia veronesi université grenoble alpes, cnrs, cea, irig, symmes, 17 rue des martyrs, f-38000 grenoble, france université grenoble alpes, cnrs, cea, irig, laboratoire de chimie et biologie des métaux, 17 rue des martyrs, f-38000 grenoble, france institut de chimie moléculaire de grenoble, uar2607 cnrs université grenoble alpes">
     <a class="paper-title" href="https://doi.org/10.1021/jacs.5c22597" target="_blank" rel="noopener">Investigating the Intrinsic Activity, Nature, and Deactivation Pathway of a Carbon-Nanotube-Confined Molecular Co Catalyst for CO
                     &lt;sub&gt;2&lt;/sub&gt;
                     Reduction</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">Journal of the American Chemical Society</span>
-      <span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span>
-      <span class="tag tag-institution">🏛 Université Grenoble Alpes, CNRS, CEA, IRIG, SyMMES, 17 rue des Martyrs, F-38000 Grenoble, France</span><span class="tag tag-institution">🏛 Université Grenoble Alpes, CNRS, CEA, IRIG, Laboratoire de Chimie et Biologie des Métaux, 17 rue des Martyrs, F-38000 Grenoble, France</span>
-      <span class="tag badge-journal">📰 期刊</span>
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">Journal of the American Chemical Society</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span><span class="tag tag-institution">🏛 Université Grenoble Alpes, CNRS, CEA, IRIG, SyMMES, 17 rue des Martyrs, F-38000 Grenoble, France</span><span class="tag tag-institution">🏛 Université Grenoble Alpes, CNRS, CEA, IRIG, Laboratoire de Chimie et Biologie des Métaux, 17 rue des Martyrs, F-38000 Grenoble, France</span><span class="tag badge-journal">📰 期刊</span></div>
     <div class="paper-authors">Matthieu Haake, Cécile Caumes, Ragnar Bjornsson, Christine Saint-Pierre et al.</div>
-
-
+    
+    
     <div class="paper-links"><a class="btn-link" href="https://doi.org/10.1021/jacs.5c22597" target="_blank" rel="noopener">arXiv</a></div>
   </div>
-  <div class="paper-card" data-categories="llm_chemistry" data-source="journal" data-searchtext="interlayer-confined molecular assembly enables a family of two-dimensional room-temperature ferromagnets yang liu, haifeng lv, xiaomeng chen, ke xu et al. university of science &amp; technology of china state key laboratory of precision and intelligent chemistry, school of chemistry and materials science">
+  <div class="paper-card" data-categories="llm_chemistry" data-source="journal" data-searchtext="interlayer-confined molecular assembly enables a family of two-dimensional room-temperature ferromagnets yang liu haifeng lv xiaomeng chen ke xu yuqiao guo zimo liu university of science &amp; technology of china state key laboratory of precision and intelligent chemistry, school of chemistry and materials science">
     <a class="paper-title" href="https://doi.org/10.1021/jacs.5c20496" target="_blank" rel="noopener">Interlayer-Confined Molecular Assembly Enables a Family of Two-Dimensional Room-Temperature Ferromagnets</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">Journal of the American Chemical Society</span>
-      <span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span>
-      <span class="tag tag-institution">🏛 University of Science &amp; Technology of China</span><span class="tag tag-institution">🏛 State Key Laboratory of Precision and Intelligent Chemistry, School of Chemistry and Materials Science</span>
-      <span class="tag badge-journal">📰 期刊</span>
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">Journal of the American Chemical Society</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span><span class="tag tag-institution">🏛 University of Science &amp; Technology of China</span><span class="tag tag-institution">🏛 State Key Laboratory of Precision and Intelligent Chemistry, School of Chemistry and Materials Science</span><span class="tag badge-journal">📰 期刊</span></div>
     <div class="paper-authors">Yang Liu, Haifeng Lv, Xiaomeng Chen, Ke Xu et al.</div>
-
-
+    
+    
     <div class="paper-links"><a class="btn-link" href="https://doi.org/10.1021/jacs.5c20496" target="_blank" rel="noopener">arXiv</a></div>
   </div>
-  <div class="paper-card" data-categories="llm_chemistry" data-source="journal" data-searchtext="stereomolgraph: stereochemistry-aware molecular and reaction graphs maxim papusha, kai leonhard institute of technical thermodynamics, rwth aachen university, schinkelstr. 8, 52062 aachen, germany">
+  <div class="paper-card" data-categories="llm_chemistry" data-source="journal" data-searchtext="stereomolgraph: stereochemistry-aware molecular and reaction graphs maxim papusha kai leonhard institute of technical thermodynamics, rwth aachen university, schinkelstr. 8, 52062 aachen, germany">
     <a class="paper-title" href="https://doi.org/10.1021/acs.jcim.5c02523" target="_blank" rel="noopener">StereoMolGraph: Stereochemistry-Aware Molecular and Reaction Graphs</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">Journal of Chemical Information and Modeling</span>
-      <span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span>
-      <span class="tag tag-institution">🏛 Institute of Technical Thermodynamics, RWTH Aachen University, Schinkelstr. 8, 52062 Aachen, Germany</span>
-      <span class="tag badge-journal">📰 期刊</span>
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">Journal of Chemical Information and Modeling</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span><span class="tag tag-institution">🏛 Institute of Technical Thermodynamics, RWTH Aachen University, Schinkelstr. 8, 52062 Aachen, Germany</span><span class="tag badge-journal">📰 期刊</span></div>
     <div class="paper-authors">Maxim Papusha, Kai Leonhard</div>
-
-
+    
+    
     <div class="paper-links"><a class="btn-link" href="https://doi.org/10.1021/acs.jcim.5c02523" target="_blank" rel="noopener">arXiv</a></div>
   </div>
   <div class="paper-card" data-categories="drug_design" data-source="journal" data-searchtext="charmm-gui
-                    &amp;lt;i&amp;gt;ligand docker&amp;lt;/i&amp;gt;
-                    for molecular docking with various docking programs donghyuk suh, gyusik kim, wonpil im lehigh university department of industrial pharmacy department of biological sciences">
+                    &lt;i&gt;ligand docker&lt;/i&gt;
+                    for molecular docking with various docking programs donghyuk suh gyusik kim wonpil im lehigh university department of industrial pharmacy department of biological sciences">
     <a class="paper-title" href="https://doi.org/10.1021/acs.jcim.6c00111" target="_blank" rel="noopener">CHARMM-GUI
                     &lt;i&gt;Ligand Docker&lt;/i&gt;
                     for Molecular Docking with Various Docking Programs</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">Journal of Chemical Information and Modeling</span>
-      <span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span>
-      <span class="tag tag-institution">🏛 Lehigh University</span><span class="tag tag-institution">🏛 Department of Industrial Pharmacy</span>
-      <span class="tag badge-journal">📰 期刊</span>
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">Journal of Chemical Information and Modeling</span><span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag tag-institution">🏛 Lehigh University</span><span class="tag tag-institution">🏛 Department of Industrial Pharmacy</span><span class="tag badge-journal">📰 期刊</span></div>
     <div class="paper-authors">Donghyuk Suh, Gyusik Kim, Wonpil Im</div>
-
-
+    
+    
     <div class="paper-links"><a class="btn-link" href="https://doi.org/10.1021/acs.jcim.6c00111" target="_blank" rel="noopener">arXiv</a></div>
   </div>
-  <div class="paper-card" data-categories="llm_chemistry" data-source="journal" data-searchtext="ai-medcraft: a strategy-driven ai platform for multi-objective molecular design khaled barakat, michael jordy rojas ruiz, hazem ahmed, ehsan shahini et al. thoth biosimulations inc., 4560 enterprise square, 10230 jasper avenue, edmonton, alberta t5j 4p6, canada">
+  <div class="paper-card" data-categories="llm_chemistry" data-source="journal" data-searchtext="ai-medcraft: a strategy-driven ai platform for multi-objective molecular design khaled barakat michael jordy rojas ruiz hazem ahmed ehsan shahini yomna barakat thoth biosimulations inc., 4560 enterprise square, 10230 jasper avenue, edmonton, alberta t5j 4p6, canada">
     <a class="paper-title" href="https://doi.org/10.1021/acs.jcim.6c00329" target="_blank" rel="noopener">AI-MedCraft: A Strategy-Driven AI Platform for Multi-Objective Molecular Design</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">Journal of Chemical Information and Modeling</span>
-      <span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span>
-      <span class="tag tag-institution">🏛 Thoth Biosimulations Inc., 4560 Enterprise Square, 10230 Jasper Avenue, Edmonton, Alberta T5J 4P6, Canada</span>
-      <span class="tag badge-journal">📰 期刊</span>
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">Journal of Chemical Information and Modeling</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span><span class="tag tag-institution">🏛 Thoth Biosimulations Inc., 4560 Enterprise Square, 10230 Jasper Avenue, Edmonton, Alberta T5J 4P6, Canada</span><span class="tag badge-journal">📰 期刊</span></div>
     <div class="paper-authors">Khaled Barakat, Michael Jordy Rojas Ruiz, Hazem Ahmed, Ehsan Shahini et al.</div>
-
-
+    
+    
     <div class="paper-links"><a class="btn-link" href="https://doi.org/10.1021/acs.jcim.6c00329" target="_blank" rel="noopener">arXiv</a></div>
   </div>
 </div>
 <div class="day-group" data-date="2026-03-25">
   <div class="date-header">2026-03-25</div>
-  <div class="paper-card" data-categories="materials_science" data-source="arxiv" data-searchtext="autotuning t-painn: transfer learning for graph neural network interatomic potentials vivienne pelletier, vedant bhat, daniel j. rivera, steven a. wilson et al. ">
+  <div class="paper-card" data-categories="materials_science" data-source="arxiv" data-searchtext="autotuning t-painn: transfer learning for graph neural network interatomic potentials vivienne pelletier vedant bhat daniel j. rivera steven a. wilson christopher l. muhich ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.24752" target="_blank" rel="noopener">Autotuning T-PaiNN: Transfer Learning for Graph Neural Network Interatomic Potentials</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span></div>
     <div class="paper-authors">Vivienne Pelletier, Vedant Bhat, Daniel J. Rivera, Steven A. Wilson et al.</div>
-<div class="paper-zh-summary">【神经网络势 · arXiv】Autotuning T-PaiNN 利用经典力场数据进行迁移学习，显著提升 GNN 原子间势的效率。在低数据场景（QM9）误差降低 25 倍，为量子力学性质预测提供数量级级别的精度提升。</div>
-    <div class="paper-abstract">Transfer learning framework leveraging classical force field data to improve GNN interatomic potentials. 25x error reduction in low-data regimes for QM9. Order-of-magnitude MAE reduction.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【神经网络势 · arXiv】Autotuning T-PaiNN 利用经典力场数据进行迁移学习，显著提升 GNN 原子间势的效率。在低数据场景（QM9）误差降低 25 倍，为量子力学性质预测提供数量级级别的精度提升。</div>
+        <div class="paper-abstract">Transfer learning framework leveraging classical force field data to improve GNN interatomic potentials. 25x error reduction in low-data regimes for QM9. Order-of-magnitude MAE reduction.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.24752" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.24752" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
 <div class="day-group" data-date="2026-03-24">
   <div class="date-header">2026-03-24</div>
-  <div class="paper-card" data-categories="molecular_generation,llm_chemistry" data-source="arxiv" data-searchtext="desro: deciphering scientific reasoning steps from outcome data zequn liu, kehan wu, shufang xie, zekun guo et al. ">
+  <div class="paper-card" data-categories="molecular_generation,llm_chemistry" data-source="arxiv" data-searchtext="desro: deciphering scientific reasoning steps from outcome data zequn liu kehan wu shufang xie zekun guo wei zhang tao qin yingce xia et al. ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.20262" target="_blank" rel="noopener">DESRO: Deciphering Scientific Reasoning Steps from Outcome Data</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span></div>
     <div class="paper-authors">Zequn Liu, Kehan Wu, Shufang Xie, Zekun Guo et al.</div>
-<div class="paper-zh-summary">【分子优化推理 · arXiv】DESRO 从大量分子实验结果中自动反推科学推理步骤，桥接实验数据与推理链条。在 230 万分子性质记录上训练，18 个分子优化任务中 15 个达到最高成功率。</div>
-    <div class="paper-abstract">DESRO bridges gap between abundant molecular experimental outcomes and scarce reasoning steps. Applied to molecule optimization with 2.3M molecular property records; highest success rate on 15/18 tasks.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【分子优化推理 · arXiv】DESRO 从大量分子实验结果中自动反推科学推理步骤，桥接实验数据与推理链条。在 230 万分子性质记录上训练，18 个分子优化任务中 15 个达到最高成功率。</div>
+        <div class="paper-abstract">DESRO bridges gap between abundant molecular experimental outcomes and scarce reasoning steps. Applied to molecule optimization with 2.3M molecular property records; highest success rate on 15/18 tasks.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.20262" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.20262" target="_blank" rel="noopener">PDF</a></div>
   </div>
-  <div class="paper-card" data-categories="materials_science" data-source="arxiv" data-searchtext="alphadiffract: deep learning for powder x-ray diffraction analysis nina andrejevic, ming du, hemant sharma, james p. horwath et al. ">
+  <div class="paper-card" data-categories="materials_science" data-source="arxiv" data-searchtext="alphadiffract: deep learning for powder x-ray diffraction analysis nina andrejevic ming du hemant sharma james p. horwath et al. ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.23367" target="_blank" rel="noopener">AlphaDiffract: Deep Learning for Powder X-ray Diffraction Analysis</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span></div>
     <div class="paper-authors">Nina Andrejevic, Ming Du, Hemant Sharma, James P. Horwath et al.</div>
-<div class="paper-zh-summary">【晶体结构 · arXiv】AlphaDiffract 是面向粉末 X 射线衍射数据的深度学习系统，基于 ConvNeXt 架构在 3100 万模拟衍射图案上训练。预测晶系、空间群和晶格参数，在实验数据集上达到 SOTA。</div>
-    <div class="paper-abstract">Deep learning system for analyzing powder X-ray diffraction data. Predicts crystal system, space group, and lattice parameters. ConvNeXt architecture trained on 31M+ simulated patterns.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【晶体结构 · arXiv】AlphaDiffract 是面向粉末 X 射线衍射数据的深度学习系统，基于 ConvNeXt 架构在 3100 万模拟衍射图案上训练。预测晶系、空间群和晶格参数，在实验数据集上达到 SOTA。</div>
+        <div class="paper-abstract">Deep learning system for analyzing powder X-ray diffraction data. Predicts crystal system, space group, and lattice parameters. ConvNeXt architecture trained on 31M+ simulated patterns.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.23367" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.23367" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
 <div class="day-group" data-date="2026-03-23">
   <div class="date-header">2026-03-23</div>
-  <div class="paper-card" data-categories="drug_design" data-source="arxiv" data-searchtext="development and large-scale benchmarks of a protein-ligand absolute binding free energy toolkit yu liu, ailun wang, yu xia, zhi wang et al. ">
+  <div class="paper-card" data-categories="drug_design" data-source="arxiv" data-searchtext="development and large-scale benchmarks of a protein-ligand absolute binding free energy toolkit yu liu ailun wang yu xia zhi wang wen yan ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.22274" target="_blank" rel="noopener">Development and Large-Scale Benchmarks of a Protein-Ligand Absolute Binding Free Energy Toolkit</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span></div>
     <div class="paper-authors">Yu Liu, Ailun Wang, Yu Xia, Zhi Wang et al.</div>
-<div class="paper-zh-summary">【结合自由能 · arXiv】Felis 工具包实现高通量蛋白-配体绝对结合自由能（ABFE）计算。在 43 个蛋白靶点、859 个配体上建立大规模 benchmark，零样本预测无需自定义力场参数。</div>
-    <div class="paper-abstract">Felis toolkit for high-throughput ABFE calculations. 43 protein targets and 859 ligands benchmark. Zero-shot predictions without custom force-field modifications.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【结合自由能 · arXiv】Felis 工具包实现高通量蛋白-配体绝对结合自由能（ABFE）计算。在 43 个蛋白靶点、859 个配体上建立大规模 benchmark，零样本预测无需自定义力场参数。</div>
+        <div class="paper-abstract">Felis toolkit for high-throughput ABFE calculations. 43 protein targets and 859 ligands benchmark. Zero-shot predictions without custom force-field modifications.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.22274" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.22274" target="_blank" rel="noopener">PDF</a></div>
   </div>
   <div class="paper-card" data-categories="drug_design,molecular_generation" data-source="arxiv" data-searchtext="latent style-based quantum wasserstein gan for drug design anonymous et al. ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.22399" target="_blank" rel="noopener">Latent Style-based Quantum Wasserstein GAN for Drug Design</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span></div>
     <div class="paper-authors">Anonymous et al.</div>
-<div class="paper-zh-summary">【量子计算 + 药物设计 · arXiv】将量子 Wasserstein GAN 与潜空间风格编码结合，用于从头药物设计。在 IBM Heron 156 量子比特计算机上验证推理可行性，探索量子-经典混合生成方法。</div>
-    <div class="paper-abstract">Quantum computing + GANs for de novo drug design. Validated on IBM Heron 156-qubit quantum computer.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【量子计算 + 药物设计 · arXiv】将量子 Wasserstein GAN 与潜空间风格编码结合，用于从头药物设计。在 IBM Heron 156 量子比特计算机上验证推理可行性，探索量子-经典混合生成方法。</div>
+        <div class="paper-abstract">Quantum computing + GANs for de novo drug design. Validated on IBM Heron 156-qubit quantum computer.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.22399" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.22399" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
 <div class="day-group" data-date="2026-03-20">
   <div class="date-header">2026-03-20</div>
-  <div class="paper-card" data-categories="materials_science,llm_chemistry" data-source="arxiv" data-searchtext="nexerra-r1: a chemical language model for reticular materials design dhruv menon, omar m. yaghi, david fairen-jimenez et al. uc berkeley cambridge">
+  <div class="paper-card" data-categories="materials_science,llm_chemistry" data-source="arxiv" data-searchtext="nexerra-r1: a chemical language model for reticular materials design dhruv menon omar m. yaghi david fairen-jimenez et al. uc berkeley cambridge">
     <a class="paper-title" href="https://arxiv.org/abs/2603.20389" target="_blank" rel="noopener">Nexerra-R1: A Chemical Language Model for Reticular Materials Design</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span>
-      <span class="tag tag-institution">🏛 UC Berkeley</span><span class="tag tag-institution">🏛 Cambridge</span>
-      <span class="tag badge-code">💻 代码</span>
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span><span class="tag tag-institution">🏛 UC Berkeley</span><span class="tag tag-institution">🏛 Cambridge</span><span class="tag badge-code">💻 代码</span></div>
     <div class="paper-authors">Dhruv Menon, Omar M. Yaghi, David Fairen-Jimenez et al.</div>
-<div class="paper-zh-summary">【MOF 设计 · arXiv · UC Berkeley &amp; Cambridge】Nexerra-R1，Omar Yaghi 组（MOF 领域权威）提出的网格化学逆向设计语言模型。支持有机连接体无约束生成和多齿基序受限设计，验证已知 MOF 重发现，提出新框架 CU-525。附开源代码。</div>
-    <div class="paper-abstract">Chemical language model for MOF reticular chemistry inverse design. Supports unconstrained organic linker generation and symmetric polydentate motif design. Validates rediscovery of known MOFs and proposes CU-525.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【MOF 设计 · arXiv · UC Berkeley &amp; Cambridge】Nexerra-R1，Omar Yaghi 组（MOF 领域权威）提出的网格化学逆向设计语言模型。支持有机连接体无约束生成和多齿基序受限设计，验证已知 MOF 重发现，提出新框架 CU-525。附开源代码。</div>
+        <div class="paper-abstract">Chemical language model for MOF reticular chemistry inverse design. Supports unconstrained organic linker generation and symmetric polydentate motif design. Validates rediscovery of known MOFs and proposes CU-525.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.20389" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.20389" target="_blank" rel="noopener">PDF</a> <a class="btn-link" href="https://github.com/fairen-group/nexerra-r1" target="_blank" rel="noopener">Code</a></div>
   </div>
 </div>
@@ -525,81 +296,56 @@
   <div class="date-header">2026-03-18</div>
   <div class="paper-card" data-categories="molecular_generation" data-source="arxiv" data-searchtext="molrgen: training and evaluation setting for de novo molecular generation with reasoning models anonymous et al. ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.18256" target="_blank" rel="noopener">MolRGen: Training and Evaluation Setting for De Novo Molecular Generation with Reasoning Models</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span></div>
     <div class="paper-authors">Anonymous et al.</div>
-<div class="paper-zh-summary">【分子生成 · arXiv】提出 MolRGen，首个面向推理模型的从头分子生成训练和评估框架。使用强化学习训练 24B 参数 LLM，无需真实标注标签。为推理模型评估分子生成能力提供标准化 benchmark。</div>
-    <div class="paper-abstract">Benchmark dataset for training reasoning-based LLMs on de novo molecular generation without ground-truth labels. Trained 24B parameter LLM using reinforcement learning.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【分子生成 · arXiv】提出 MolRGen，首个面向推理模型的从头分子生成训练和评估框架。使用强化学习训练 24B 参数 LLM，无需真实标注标签。为推理模型评估分子生成能力提供标准化 benchmark。</div>
+        <div class="paper-abstract">Benchmark dataset for training reasoning-based LLMs on de novo molecular generation without ground-truth labels. Trained 24B parameter LLM using reinforcement learning.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.18256" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.18256" target="_blank" rel="noopener">PDF</a></div>
   </div>
   <div class="paper-card" data-categories="drug_design,molecular_generation" data-source="arxiv" data-searchtext="atmos: atomic trajectory modeling with state space models for biomolecular dynamics anonymous et al. ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.17633" target="_blank" rel="noopener">ATMOS: Atomic Trajectory Modeling with State Space Models for Biomolecular Dynamics</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span></div>
     <div class="paper-authors">Anonymous et al.</div>
-<div class="paper-zh-summary">【分子动力学 · arXiv】ATMOS 利用 Pairformer 架构的状态空间模型，直接生成蛋白质-配体体系的原子级 MD 轨迹。在 PDB、mdCATH、MISATO 数据集上训练，可替代耗时的传统 MD 模拟。</div>
-    <div class="paper-abstract">Generates atom-level MD trajectories for protein-ligand systems using Pairformer-based mechanisms. Trained on PDB structures and mdCATH/MISATO datasets.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【分子动力学 · arXiv】ATMOS 利用 Pairformer 架构的状态空间模型，直接生成蛋白质-配体体系的原子级 MD 轨迹。在 PDB、mdCATH、MISATO 数据集上训练，可替代耗时的传统 MD 模拟。</div>
+        <div class="paper-abstract">Generates atom-level MD trajectories for protein-ligand systems using Pairformer-based mechanisms. Trained on PDB structures and mdCATH/MISATO datasets.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.17633" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.17633" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
 <div class="day-group" data-date="2026-03-17">
   <div class="date-header">2026-03-17</div>
-  <div class="paper-card" data-categories="materials_science" data-source="arxiv" data-searchtext="garnet: training a neural network force field for proteins alexandre blanco-gonzález, thea k schulze, evianne rovers, joe g greener ">
+  <div class="paper-card" data-categories="materials_science" data-source="arxiv" data-searchtext="garnet: training a neural network force field for proteins alexandre blanco-gonzález thea k schulze evianne rovers joe g greener ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.16770" target="_blank" rel="noopener">Garnet: Training a Neural Network Force Field for Proteins</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span></div>
     <div class="paper-authors">Alexandre Blanco-González, Thea K Schulze, Evianne Rovers, Joe G Greener</div>
-<div class="paper-zh-summary">【蛋白质力场 · arXiv】Garnet 是首个完全从量子力学和实验数据训练的蛋白质神经网络力场，使用连续原子类型分配力场参数，不依赖任何现有力场参数，在多种分子体系上达到传统力场水平。</div>
-    <div class="paper-abstract">GNN assigning force field parameters using continuous atom typing. Trained on QM and experimental data without relying on existing parameters. Comparable to conventional force fields.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【蛋白质力场 · arXiv】Garnet 是首个完全从量子力学和实验数据训练的蛋白质神经网络力场，使用连续原子类型分配力场参数，不依赖任何现有力场参数，在多种分子体系上达到传统力场水平。</div>
+        <div class="paper-abstract">GNN assigning force field parameters using continuous atom typing. Trained on QM and experimental data without relying on existing parameters. Comparable to conventional force fields.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.16770" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.16770" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
 <div class="day-group" data-date="2026-03-15">
   <div class="date-header">2026-03-15</div>
-  <div class="paper-card" data-categories="drug_design" data-source="arxiv" data-searchtext="lapro-dta: latent dual-view drug representations for generalizable drug-target affinity prediction zihan dun, liuyi xu, an-yang lu, shuang li et al. ">
+  <div class="paper-card" data-categories="drug_design" data-source="arxiv" data-searchtext="lapro-dta: latent dual-view drug representations for generalizable drug-target affinity prediction zihan dun liuyi xu an-yang lu shuang li yining qian ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.14792" target="_blank" rel="noopener">LaPro-DTA: Latent Dual-View Drug Representations for Generalizable Drug-Target Affinity Prediction</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span></div>
     <div class="paper-authors">Zihan Dun, Liuyi Xu, An-Yang Lu, Shuang Li et al.</div>
-<div class="paper-zh-summary">【药物-靶点亲和力 · arXiv】LaPro-DTA 针对冷启动场景（未见药物）的 DTA 预测，使用潜空间双视图表示 + 随机扰动。在 Davis 数据集未见药物设置下 MSE 降低 8%，泛化性显著提升。</div>
-    <div class="paper-abstract">Cold-start drug-target affinity prediction with latent dual-view drug representation and stochastic perturbation. 8% MSE reduction on Davis dataset in unseen-drug settings.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【药物-靶点亲和力 · arXiv】LaPro-DTA 针对冷启动场景（未见药物）的 DTA 预测，使用潜空间双视图表示 + 随机扰动。在 Davis 数据集未见药物设置下 MSE 降低 8%，泛化性显著提升。</div>
+        <div class="paper-abstract">Cold-start drug-target affinity prediction with latent dual-view drug representation and stochastic perturbation. 8% MSE reduction on Davis dataset in unseen-drug settings.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.14792" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.14792" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
 <div class="day-group" data-date="2026-03-14">
   <div class="date-header">2026-03-14</div>
-  <div class="paper-card" data-categories="materials_science" data-source="arxiv" data-searchtext="high-throughput-screening ml workflow for battery materials aljoscha felix baumann, daniel mutter, daniel f. urban, christian elsässer ">
+  <div class="paper-card" data-categories="materials_science" data-source="arxiv" data-searchtext="high-throughput-screening ml workflow for battery materials aljoscha felix baumann daniel mutter daniel f. urban christian elsässer ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.10631" target="_blank" rel="noopener">High-Throughput-Screening ML Workflow for Battery Materials</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span></div>
     <div class="paper-authors">Aljoscha Felix Baumann, Daniel Mutter, Daniel F. Urban, Christian Elsässer</div>
-<div class="paper-zh-summary">【电池材料 · arXiv】面向离子嵌入电池材料的高通量机器学习筛选工作流。基于局域配位环境的键长预测，筛选约 117.5 万种过渡金属化合物，寻找高性能电池正极材料。</div>
-    <div class="paper-abstract">ML workflow for predicting volume changes during ion intercalation in battery materials. Screened ~1.175M transition-metal compounds using bond-length predictions.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【电池材料 · arXiv】面向离子嵌入电池材料的高通量机器学习筛选工作流。基于局域配位环境的键长预测，筛选约 117.5 万种过渡金属化合物，寻找高性能电池正极材料。</div>
+        <div class="paper-abstract">ML workflow for predicting volume changes during ion intercalation in battery materials. Screened ~1.175M transition-metal compounds using bond-length predictions.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.10631" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.10631" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
@@ -607,47 +353,32 @@
   <div class="date-header">2026-03-13</div>
   <div class="paper-card" data-categories="molecular_generation,drug_design,llm_chemistry" data-source="arxiv" data-searchtext="a multi-task large reasoning model for molecular science anonymous et al. ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.12808" target="_blank" rel="noopener">A Multi-task Large Reasoning Model for Molecular Science</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span><span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span><span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span></div>
     <div class="paper-authors">Anonymous et al.</div>
-<div class="paper-zh-summary">【多任务推理 · arXiv】面向分子科学的多任务大推理模型，采用多专家架构 + CoT + RL，比 baseline 提升 50.3%。提供 CNS 药物候选分子设计案例研究，展示跨任务推理能力。</div>
-    <div class="paper-abstract">Multi-specialist architecture with chain-of-thought reasoning enhanced by RL; achieves 50.3% improvement over baseline. CNS drug candidate design case study.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【多任务推理 · arXiv】面向分子科学的多任务大推理模型，采用多专家架构 + CoT + RL，比 baseline 提升 50.3%。提供 CNS 药物候选分子设计案例研究，展示跨任务推理能力。</div>
+        <div class="paper-abstract">Multi-specialist architecture with chain-of-thought reasoning enhanced by RL; achieves 50.3% improvement over baseline. CNS drug candidate design case study.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.12808" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.12808" target="_blank" rel="noopener">PDF</a></div>
   </div>
-  <div class="paper-card" data-categories="materials_science" data-source="arxiv" data-searchtext="thermodynamic descriptors from md for out-of-distribution property prediction nuria h. espejo, pablo llombart, andrés gonzález de castilla, jorge ramirez et al. ">
+  <div class="paper-card" data-categories="materials_science" data-source="arxiv" data-searchtext="thermodynamic descriptors from md for out-of-distribution property prediction nuria h. espejo pablo llombart andrés gonzález de castilla jorge ramirez jorge r. espinosa adiran garaizar ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.12017" target="_blank" rel="noopener">Thermodynamic Descriptors from MD for Out-of-Distribution Property Prediction</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span></div>
     <div class="paper-authors">Nuria H. Espejo, Pablo Llombart, Andrés González de Castilla, Jorge Ramirez et al.</div>
-<div class="paper-zh-summary">【域外预测 · arXiv】将 MD 模拟获得的热力学描述符替代结构输入，实现对训练集完全未见化学类别的准确性质预测。物理信息驱动，超越结构-性质直接映射的泛化极限。</div>
-    <div class="paper-abstract">Physics-informed framework replacing structural inputs with thermodynamic properties from MD, enabling accurate property prediction for entire chemical classes absent from training set.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【域外预测 · arXiv】将 MD 模拟获得的热力学描述符替代结构输入，实现对训练集完全未见化学类别的准确性质预测。物理信息驱动，超越结构-性质直接映射的泛化极限。</div>
+        <div class="paper-abstract">Physics-informed framework replacing structural inputs with thermodynamic properties from MD, enabling accurate property prediction for entire chemical classes absent from training set.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.12017" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.12017" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
 <div class="day-group" data-date="2026-03-10">
   <div class="date-header">2026-03-10</div>
-  <div class="paper-card" data-categories="molecular_generation,llm_chemistry" data-source="arxiv" data-searchtext="logos: an evolvable reasoning engine for rational molecular design haibin wen, zhe zhao, fanfu wang ">
+  <div class="paper-card" data-categories="molecular_generation,llm_chemistry" data-source="arxiv" data-searchtext="logos: an evolvable reasoning engine for rational molecular design haibin wen zhe zhao fanfu wang ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.09268" target="_blank" rel="noopener">Logos: An Evolvable Reasoning Engine for Rational Molecular Design</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span></div>
     <div class="paper-authors">Haibin Wen, Zhe Zhao, Fanfu Wang</div>
-<div class="paper-zh-summary">【化学推理 · arXiv】Logos 是一个可演化的分子理性设计推理引擎，将多步逻辑推理与化学合法性约束相结合。参数量远小于 GPT-4 级别模型，性能相当甚至超越，推理步骤人类可解释。</div>
-    <div class="paper-abstract">Compact molecular reasoning model integrating multi-step logical reasoning with strict chemical consistency. Matches or surpasses substantially larger general-purpose LLMs with a fraction of parameters.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【化学推理 · arXiv】Logos 是一个可演化的分子理性设计推理引擎，将多步逻辑推理与化学合法性约束相结合。参数量远小于 GPT-4 级别模型，性能相当甚至超越，推理步骤人类可解释。</div>
+        <div class="paper-abstract">Compact molecular reasoning model integrating multi-step logical reasoning with strict chemical consistency. Matches or surpasses substantially larger general-purpose LLMs with a fraction of parameters.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.09268" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.09268" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
@@ -655,16 +386,11 @@
   <div class="date-header">2026-03-05</div>
   <div class="paper-card" data-categories="drug_design,molecular_generation" data-source="arxiv" data-searchtext="fusediff: symmetry-preserving joint diffusion for dual-target structure-based drug design anonymous et al. ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.05567" target="_blank" rel="noopener">FuseDiff: Symmetry-Preserving Joint Diffusion for Dual-Target Structure-Based Drug Design</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span></div>
     <div class="paper-authors">Anonymous et al.</div>
-<div class="paper-zh-summary">【双靶点药物 · arXiv】FuseDiff 提出对称保持的联合扩散模型，可同时生成与两个靶点口袋匹配的配体构象。引入 Dual-target Local Context Fusion 机制，端到端直接设计双靶向分子。</div>
-    <div class="paper-abstract">End-to-end diffusion model generating ligands with two pocket-specific binding poses simultaneously. Implements Dual-target Local Context Fusion mechanism.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【双靶点药物 · arXiv】FuseDiff 提出对称保持的联合扩散模型，可同时生成与两个靶点口袋匹配的配体构象。引入 Dual-target Local Context Fusion 机制，端到端直接设计双靶向分子。</div>
+        <div class="paper-abstract">End-to-end diffusion model generating ligands with two pocket-specific binding poses simultaneously. Implements Dual-target Local Context Fusion mechanism.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.05567" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.05567" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
@@ -672,118 +398,84 @@
   <div class="date-header">2026-03-03</div>
   <div class="paper-card" data-categories="drug_design,molecular_generation" data-source="arxiv" data-searchtext="mmai gym for science: training liquid foundation models for drug discovery maxim kuznetsov et al. ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.03517" target="_blank" rel="noopener">MMAI Gym for Science: Training Liquid Foundation Models for Drug Discovery</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag" style="background:#6366f122;color:#6366f1;border:1px solid #6366f155">⚗️ 分子生成</span></div>
     <div class="paper-authors">Maxim Kuznetsov et al.</div>
-<div class="paper-zh-summary">【药物发现基础模型 · arXiv】多机构合作，训练专用液态基础模型（Liquid Foundation Model）用于药物发现。在分子优化、ADMET 预测、逆合成、药物-靶点活性四类任务上全面超越同规模通用大模型。</div>
-    <div class="paper-abstract">Purpose-trained Liquid Foundation Model outperforming larger general-purpose models on molecular benchmarks. Covers molecular optimization, ADMET prediction, retrosynthesis, drug-target activity.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【药物发现基础模型 · arXiv】多机构合作，训练专用液态基础模型（Liquid Foundation Model）用于药物发现。在分子优化、ADMET 预测、逆合成、药物-靶点活性四类任务上全面超越同规模通用大模型。</div>
+        <div class="paper-abstract">Purpose-trained Liquid Foundation Model outperforming larger general-purpose models on molecular benchmarks. Covers molecular optimization, ADMET prediction, retrosynthesis, drug-target activity.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.03517" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.03517" target="_blank" rel="noopener">PDF</a></div>
   </div>
-  <div class="paper-card" data-categories="drug_design,ai_agent" data-source="arxiv" data-searchtext="mozi: governed autonomy for drug discovery he cao, siyu liu, fan zhang, zijing liu et al. ">
+  <div class="paper-card" data-categories="drug_design,ai_agent" data-source="arxiv" data-searchtext="mozi: governed autonomy for drug discovery he cao siyu liu fan zhang zijing liu hao li yu li et al. ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.03295" target="_blank" rel="noopener">Mozi: Governed Autonomy for Drug Discovery</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag" style="background:#8b5cf622;color:#8b5cf6;border:1px solid #8b5cf655">🦾 AI Agent</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span><span class="tag" style="background:#8b5cf622;color:#8b5cf6;border:1px solid #8b5cf655">🦾 AI Agent</span></div>
     <div class="paper-authors">He Cao, Siyu Liu, Fan Zhang, Zijing Liu et al.</div>
-<div class="paper-zh-summary">【AI 药物发现 Agent · arXiv】Mozi 提出双层架构——治理层 + 灵活执行层，用于药物发现长链 AI Agent。角色分离的工具隔离机制 + 关键节点人工检查点，防止错误在长流程中累积扩大。</div>
-    <div class="paper-abstract">Dual-layer AI agent architecture combining governance with flexibility for drug discovery. Role-based tool isolation and strategic human checkpoints for long-horizon pharmaceutical pipelines.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【AI 药物发现 Agent · arXiv】Mozi 提出双层架构——治理层 + 灵活执行层，用于药物发现长链 AI Agent。角色分离的工具隔离机制 + 关键节点人工检查点，防止错误在长流程中累积扩大。</div>
+        <div class="paper-abstract">Dual-layer AI agent architecture combining governance with flexibility for drug discovery. Role-based tool isolation and strategic human checkpoints for long-horizon pharmaceutical pipelines.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.03295" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.03295" target="_blank" rel="noopener">PDF</a></div>
   </div>
-  <div class="paper-card" data-categories="materials_science,llm_chemistry" data-source="arxiv" data-searchtext="chemflow: hierarchical neural network for chemical mixture properties jinming fan, chao qian, wilhelm t. s. huck, william e. robinson et al. ">
+  <div class="paper-card" data-categories="materials_science,llm_chemistry" data-source="arxiv" data-searchtext="chemflow: hierarchical neural network for chemical mixture properties jinming fan chao qian wilhelm t. s. huck william e. robinson shaodong zhou ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.02810" target="_blank" rel="noopener">ChemFlow: Hierarchical Neural Network for Chemical Mixture Properties</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span><span class="tag" style="background:#3b82f622;color:#3b82f6;border:1px solid #3b82f655">🤖 LLM化学</span></div>
     <div class="paper-authors">Jinming Fan, Chao Qian, Wilhelm T. S. Huck, William E. Robinson et al.</div>
-<div class="paper-zh-summary">【混合物性质 · arXiv】ChemFlow 提出用于化学混合物性质预测的分层神经网络，整合原子-官能团-分子三个层级特征，引入双向注意力机制建模组成依赖性质。</div>
-    <div class="paper-abstract">Hierarchical NN framework for chemical mixtures integrating atomic, functional group, and molecular-level features with bidirectional attention for composition-dependent property modeling.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【混合物性质 · arXiv】ChemFlow 提出用于化学混合物性质预测的分层神经网络，整合原子-官能团-分子三个层级特征，引入双向注意力机制建模组成依赖性质。</div>
+        <div class="paper-abstract">Hierarchical NN framework for chemical mixtures integrating atomic, functional group, and molecular-level features with bidirectional attention for composition-dependent property modeling.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.02810" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.02810" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
 <div class="day-group" data-date="2026-03-02">
   <div class="date-header">2026-03-02</div>
-  <div class="paper-card" data-categories="drug_design" data-source="arxiv" data-searchtext="on the reliability of ai methods in drug discovery: evaluation of boltz-2 shunzhou wan, xibei zhang, xiao xue, peter v. coveney ">
+  <div class="paper-card" data-categories="drug_design" data-source="arxiv" data-searchtext="on the reliability of ai methods in drug discovery: evaluation of boltz-2 shunzhou wan xibei zhang xiao xue peter v. coveney ">
     <a class="paper-title" href="https://arxiv.org/abs/2603.05532" target="_blank" rel="noopener">On the Reliability of AI Methods in Drug Discovery: Evaluation of Boltz-2</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#ec489922;color:#ec4899;border:1px solid #ec489955">💊 药物设计</span></div>
     <div class="paper-authors">Shunzhou Wan, Xibei Zhang, Xiao Xue, Peter V. Coveney</div>
-<div class="paper-zh-summary">【Boltz-2 评估 · arXiv】Coveney 组对 Boltz-2 生物分子基础模型的大规模可靠性评估。在 3CLPro（16780 个）和 TNKS2（21702 个）化合物上测试，能量预测仅达弱到中等相关性，指出物理方法精修的必要性。</div>
-    <div class="paper-abstract">Extensive evaluation of Boltz-2 biomolecular foundation model on 16,780 (3CLPro) and 21,702 (TNKS2) compounds. Shows only weak-to-moderate correlations in energetic evaluations. Highlights necessity of physics-based refinement.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【Boltz-2 评估 · arXiv】Coveney 组对 Boltz-2 生物分子基础模型的大规模可靠性评估。在 3CLPro（16780 个）和 TNKS2（21702 个）化合物上测试，能量预测仅达弱到中等相关性，指出物理方法精修的必要性。</div>
+        <div class="paper-abstract">Extensive evaluation of Boltz-2 biomolecular foundation model on 16,780 (3CLPro) and 21,702 (TNKS2) compounds. Shows only weak-to-moderate correlations in energetic evaluations. Highlights necessity of physics-based refinement.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2603.05532" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2603.05532" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
 <div class="day-group" data-date="2026-02-19">
   <div class="date-header">2026-02-19</div>
-  <div class="paper-card" data-categories="ai_agent,materials_science" data-source="arxiv" data-searchtext="el agente sólido: a new age(nt) for solid state simulations sai govind hari kumar, alán aspuru-guzik et al. university of toronto">
+  <div class="paper-card" data-categories="ai_agent,materials_science" data-source="arxiv" data-searchtext="el agente sólido: a new age(nt) for solid state simulations sai govind hari kumar alán aspuru-guzik et al. university of toronto">
     <a class="paper-title" href="https://arxiv.org/abs/2602.17886" target="_blank" rel="noopener">El Agente Sólido: A New Age(nt) for Solid State Simulations</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#8b5cf622;color:#8b5cf6;border:1px solid #8b5cf655">🦾 AI Agent</span><span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span>
-      <span class="tag tag-institution">🏛 University of Toronto</span>
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#8b5cf622;color:#8b5cf6;border:1px solid #8b5cf655">🦾 AI Agent</span><span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span><span class="tag tag-institution">🏛 University of Toronto</span></div>
     <div class="paper-authors">Sai Govind Hari Kumar, Alán Aspuru-Guzik et al.</div>
-<div class="paper-zh-summary">【固态量子化学 Agent · arXiv · University of Toronto】Alán Aspuru-Guzik 组提出 El Agente Sólido，多 Agent 框架自动化固态量子化学工作流。集成 DFT、声子计算、ML 势能，使用 Quantum ESPRESSO，是 AI Agent 做科学计算的重要范式。</div>
-    <div class="paper-abstract">Multi-agent framework for automating solid-state quantum chemistry workflows. Integrates DFT, phonon calculations, and ML potentials using Quantum ESPRESSO.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【固态量子化学 Agent · arXiv · University of Toronto】Alán Aspuru-Guzik 组提出 El Agente Sólido，多 Agent 框架自动化固态量子化学工作流。集成 DFT、声子计算、ML 势能，使用 Quantum ESPRESSO，是 AI Agent 做科学计算的重要范式。</div>
+        <div class="paper-abstract">Multi-agent framework for automating solid-state quantum chemistry workflows. Integrates DFT, phonon calculations, and ML potentials using Quantum ESPRESSO.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2602.17886" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2602.17886" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
 <div class="day-group" data-date="2026-02-13">
   <div class="date-header">2026-02-13</div>
-  <div class="paper-card" data-categories="reaction_prediction" data-source="arxiv" data-searchtext="order matters in retrosynthesis: structure-aware generation via reaction-center-guided discrete flow matching chenguang wang, zihan zhou, lei bai, tianshu yu ">
+  <div class="paper-card" data-categories="reaction_prediction" data-source="arxiv" data-searchtext="order matters in retrosynthesis: structure-aware generation via reaction-center-guided discrete flow matching chenguang wang zihan zhou lei bai tianshu yu ">
     <a class="paper-title" href="https://arxiv.org/abs/2602.09275" target="_blank" rel="noopener">Order Matters in Retrosynthesis: Structure-aware Generation via Reaction-Center-Guided Discrete Flow Matching</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#f59e0b22;color:#f59e0b;border:1px solid #f59e0b55">🔄 反应预测</span>
-      
-      
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#f59e0b22;color:#f59e0b;border:1px solid #f59e0b55">🔄 反应预测</span></div>
     <div class="paper-authors">Chenguang Wang, Zihan Zhou, Lei Bai, Tianshu Yu</div>
-<div class="paper-zh-summary">【逆合成 · arXiv】证明原子排序对于无模板逆合成至关重要。基于反应中心引导的离散流匹配，将生成步骤从 500 步减至 20-50 步。280K 参数小模型在正确排序下媲美 65M 参数模型，USPTO-50k top-1 达 61.2%。</div>
-    <div class="paper-abstract">Structure-aware template-free retrosynthesis via discrete flow matching. Reduces generation steps from 500 to 20-50. 61.2% top-1 on USPTO-50k. 280K parameter model matches 65M parameter baseline with proper atom ordering.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【逆合成 · arXiv】证明原子排序对于无模板逆合成至关重要。基于反应中心引导的离散流匹配，将生成步骤从 500 步减至 20-50 步。280K 参数小模型在正确排序下媲美 65M 参数模型，USPTO-50k top-1 达 61.2%。</div>
+        <div class="paper-abstract">Structure-aware template-free retrosynthesis via discrete flow matching. Reduces generation steps from 500 to 20-50. 61.2% top-1 on USPTO-50k. 280K parameter model matches 65M parameter baseline with proper atom ordering.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2602.09275" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2602.09275" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
 <div class="day-group" data-date="2026-02-07">
   <div class="date-header">2026-02-07</div>
-  <div class="paper-card" data-categories="ai_agent,materials_science" data-source="arxiv" data-searchtext="graphagents: knowledge graph-guided agentic ai for cross-domain materials design isabella a. stewart, markus j. buehler et al. mit">
+  <div class="paper-card" data-categories="ai_agent,materials_science" data-source="arxiv" data-searchtext="graphagents: knowledge graph-guided agentic ai for cross-domain materials design isabella a. stewart markus j. buehler et al. mit">
     <a class="paper-title" href="https://arxiv.org/abs/2602.07491" target="_blank" rel="noopener">GraphAgents: Knowledge Graph-Guided Agentic AI for Cross-Domain Materials Design</a>
-    <div class="paper-meta">
-      <span class="tag tag-source">arXiv</span>
-      <span class="tag" style="background:#8b5cf622;color:#8b5cf6;border:1px solid #8b5cf655">🦾 AI Agent</span><span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span>
-      <span class="tag tag-institution">🏛 MIT</span>
-      <span class="tag badge-top">🏆 顶级机构</span>
-    </div>
+    <div class="paper-meta"><span class="tag tag-source">arXiv</span><span class="tag" style="background:#8b5cf622;color:#8b5cf6;border:1px solid #8b5cf655">🦾 AI Agent</span><span class="tag" style="background:#10b98122;color:#10b981;border:1px solid #10b98155">🔬 材料科学</span><span class="tag tag-institution">🏛 MIT</span><span class="tag badge-top">🏆 顶级机构</span></div>
     <div class="paper-authors">Isabella A. Stewart, Markus J. Buehler et al.</div>
-<div class="paper-zh-summary">【材料设计 Agent · arXiv · MIT】Markus Buehler 组（MIT）提出 GraphAgents，知识图谱引导的多 Agent 框架，专注寻找 PFAS 替代品的可持续材料。展示跨化学、材料、生物领域的图遍历推理策略。</div>
-    <div class="paper-abstract">Multi-agent framework using knowledge graphs for PFAS-alternative sustainable materials discovery. Graph traversal strategies for cross-domain materials design.</div>
-    <button class="toggle-abstract">▼ 展开摘要（英文）</button>
+    <div class="paper-zh-summary">【材料设计 Agent · arXiv · MIT】Markus Buehler 组（MIT）提出 GraphAgents，知识图谱引导的多 Agent 框架，专注寻找 PFAS 替代品的可持续材料。展示跨化学、材料、生物领域的图遍历推理策略。</div>
+        <div class="paper-abstract">Multi-agent framework using knowledge graphs for PFAS-alternative sustainable materials discovery. Graph traversal strategies for cross-domain materials design.</div>
+    <button class="toggle-abstract">▼ 展开原文摘要</button>
     <div class="paper-links"><a class="btn-link" href="https://arxiv.org/abs/2602.07491" target="_blank" rel="noopener">arXiv</a> <a class="btn-link" href="https://arxiv.org/pdf/2602.07491" target="_blank" rel="noopener">PDF</a></div>
   </div>
 </div>
 
     </div>
-    <div id="no-results" class="hidden" style="color:var(--text-muted);text-align:center;padding:40px;">
+    <div id="no-results" class="hidden"
+         style="color:var(--text-muted);text-align:center;padding:40px;">
       没有找到匹配的论文
     </div>
   </main>
@@ -792,64 +484,40 @@
 (function() {
   var cards = Array.from(document.querySelectorAll('.paper-card'));
   var dayGroups = Array.from(document.querySelectorAll('.day-group'));
-
   function getActiveCats() {
     return Array.from(document.querySelectorAll('.cat-filter:checked')).map(e => e.value);
   }
   function getActiveSrcs() {
     return Array.from(document.querySelectorAll('.src-filter:checked')).map(e => e.value);
   }
-  function getSearchTerm() {
-    return document.getElementById('search-input').value.toLowerCase().trim();
-  }
-
   function applyFilters() {
-    var cats = getActiveCats();
-    var srcs = getActiveSrcs();
-    var term = getSearchTerm();
+    var cats = getActiveCats(), srcs = getActiveSrcs();
+    var term = document.getElementById('search-input').value.toLowerCase().trim();
     var visible = 0;
-
     cards.forEach(function(card) {
-      var cardCats = (card.dataset.categories || '').split(',');
-      var cardSrc = card.dataset.source || '';
-      var cardText = card.dataset.searchtext || '';
-      var catOk = cats.some(c => cardCats.includes(c));
-      var srcOk = srcs.includes(cardSrc);
-      var termOk = !term || cardText.includes(term);
-      if (catOk && srcOk && termOk) {
-        card.classList.remove('hidden');
-        visible++;
-      } else {
-        card.classList.add('hidden');
-      }
+      var ok = cats.some(c => (card.dataset.categories||'').split(',').includes(c))
+            && srcs.includes(card.dataset.source||'')
+            && (!term || (card.dataset.searchtext||'').includes(term));
+      card.classList.toggle('hidden', !ok);
+      if (ok) visible++;
     });
-
-    // Hide empty day groups
-    dayGroups.forEach(function(group) {
-      var anyVisible = group.querySelectorAll('.paper-card:not(.hidden)').length > 0;
-      group.style.display = anyVisible ? '' : 'none';
+    dayGroups.forEach(function(g) {
+      g.style.display = g.querySelectorAll('.paper-card:not(.hidden)').length ? '' : 'none';
     });
-
     document.getElementById('no-results').classList.toggle('hidden', visible > 0);
     document.getElementById('stats').textContent = '显示 ' + visible + ' / ' + cards.length + ' 篇';
   }
-
-  document.querySelectorAll('.cat-filter, .src-filter').forEach(function(cb) {
-    cb.addEventListener('change', applyFilters);
-  });
+  document.querySelectorAll('.cat-filter,.src-filter').forEach(cb => cb.addEventListener('change', applyFilters));
   document.getElementById('search-input').addEventListener('input', applyFilters);
-
-  // Abstract toggle
   document.querySelectorAll('.toggle-abstract').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var ab = this.parentElement.querySelector('.paper-abstract');
       if (ab) {
         ab.classList.toggle('open');
-        this.textContent = ab.classList.contains('open') ? '▲ 收起摘要' : '▼ 展开摘要';
+        this.textContent = ab.classList.contains('open') ? '▲ 收起原文摘要' : '▼ 展开原文摘要';
       }
     });
   });
-
   applyFilters();
 })();
 </script>
